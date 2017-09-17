@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class LabExperimentalDataModel01 implements LabInterface01<Integer> {
+public class LabExperimentalDataModel01 implements LabInterface<Integer> {
 
     private Integer[] array;
 

@@ -2,9 +2,7 @@ package com.rozzer.lab.l01;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class LabClassesTest {
 
@@ -13,17 +11,17 @@ public class LabClassesTest {
         Integer i1 = 1;
         Integer i2 = 2;
         Integer i3 = 3;
-        LabExperimentalDataModel01 labExperimentalDataModel01 = new LabExperimentalDataModel01();
-        Integer[] integers = labExperimentalDataModel01.addToArrayAndGet(i1);
+        LabExperimentalDataModel01 labExperimentalDataModel0101 = new LabExperimentalDataModel01();
+        Integer[] integers = labExperimentalDataModel0101.addToArrayAndGet(i1);
         assertEquals(i1,integers[0]);
-        integers = labExperimentalDataModel01.addToArrayAndGet(i2);
+        integers = labExperimentalDataModel0101.addToArrayAndGet(i2);
         assertEquals(i2,integers[0]);
-        integers = labExperimentalDataModel01.addToArrayAndGet(i3);
+        integers = labExperimentalDataModel0101.addToArrayAndGet(i3);
         assertEquals(i3,integers[0]);
-        labExperimentalDataModel01.setStandard(4);
-        assertFalse(labExperimentalDataModel01.getDTO().isHaveStandard());
-        labExperimentalDataModel01.setStandard(2);
-        assertTrue(labExperimentalDataModel01.getDTO().isHaveStandard());
+        labExperimentalDataModel0101.setStandard(4);
+        assertFalse(labExperimentalDataModel0101.getDTO().isHaveStandard());
+        labExperimentalDataModel0101.setStandard(2);
+        assertTrue(labExperimentalDataModel0101.getDTO().isHaveStandard());
     }
 
     @Test

@@ -1,6 +1,6 @@
 package com.rozzer.lab.l01;
 
-public interface LabInterface01<T> {
+public interface LabInterface<T> {
 
     T[] addToArrayAndGet(T nextValue);
 
