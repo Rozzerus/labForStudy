@@ -8,4 +8,10 @@ public interface LabInterface<T> {
 
     LabDTO<T> fitsTheCriteria(T maxValue, T minValue, T standardValue) throws NoCriteriaInSearchException;
 
+    void setArray(T[] array);
+
+    void setStandard(T standard);
+
+    void setId(int id);
+
 }

@@ -12,15 +12,15 @@ public class LabExperimentalDataModel01 implements LabInterface<Integer> {
 
     private Integer standard;
 
-    private int anInt;
+    private int id;
 
     public LabExperimentalDataModel01() {
     }
 
-    public LabExperimentalDataModel01(Integer[] array, Integer standard, int anInt) {
+    public LabExperimentalDataModel01(Integer[] array, Integer standard, int id) {
         this.array = array;
         this.standard = standard;
-        this.anInt = anInt;
+        this.id = id;
     }
 
 
@@ -85,22 +85,22 @@ public class LabExperimentalDataModel01 implements LabInterface<Integer> {
         this.standard = standard;
     }
 
-    public int getAnInt() {
-        return anInt;
+    public int getId() {
+        return id;
     }
 
-    public void setAnInt(int anInt) {
-        this.anInt = anInt;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode() + anInt;
+        return super.hashCode() + id;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (Objects.nonNull(obj) && obj.equals(anInt)){
+        if (Objects.nonNull(obj) && obj.equals(id)){
             return true;
         }
         return super.equals(obj);
@@ -109,6 +109,6 @@ public class LabExperimentalDataModel01 implements LabInterface<Integer> {
     @Override
     public String toString() {
         LabDTO<Integer> dto = getDTO();
-        return "Max value : " + dto.getMax() + "; Min value : " +dto.getMin()+ "; Standard value : " +standard+".";
+        return "Max value : " + dto.getMax() + "; Min value : " +dto.getMin()+ "; Standard value : " +standard+" Id = "+id+".";
     }
 }
