@@ -51,7 +51,7 @@ public class LabExperimentalDataModel01 implements LabInterface<Integer> {
     }
 
     @Override
-    public LabDTO<Integer> fitsTheCriteria(Integer maxValue, Integer minValue, Integer standardValue) throws NoCriteriaInSearchException {
+    public LabDTO<Integer> fitsTheCriteria(Integer maxValue, Integer minValue, Integer standardValue) {
         if (Objects.isNull(maxValue) && Objects.isNull(minValue) && Objects.isNull(standardValue)){
             throw new NoCriteriaInSearchException();
         }
