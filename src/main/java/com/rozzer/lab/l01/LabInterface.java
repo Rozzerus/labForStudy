@@ -1,5 +1,8 @@
 package com.rozzer.lab.l01;
 
+import java.io.OutputStream;
+import java.io.Writer;
+
 public interface LabInterface<T> {
 
     T[] addToArrayAndGet(T nextValue);
@@ -13,5 +16,9 @@ public interface LabInterface<T> {
     void setStandard(T standard);
 
     void setId(int id);
+
+    void output(OutputStream out);
+
+    void write(Writer out);
 
 }

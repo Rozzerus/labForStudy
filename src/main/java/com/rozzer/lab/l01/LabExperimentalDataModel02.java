@@ -1,7 +1,10 @@
 package com.rozzer.lab.l01;
 
 import com.google.common.collect.Lists;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.io.OutputStream;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -88,6 +91,18 @@ public class LabExperimentalDataModel02 implements LabInterface<String> {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public void output(OutputStream out) {
+        throw new NotImplementedException();
+
+    }
+
+    @Override
+    public void write(Writer out) {
+        throw new NotImplementedException();
+
     }
 
     @Override
