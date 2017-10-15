@@ -1,9 +1,10 @@
 package com.rozzer.lab.l01;
 
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.io.Writer;
 
-public interface LabInterface<T> {
+public interface LabInterface<T> extends Serializable {
 
     T[] addToArrayAndGet(T nextValue);
 
