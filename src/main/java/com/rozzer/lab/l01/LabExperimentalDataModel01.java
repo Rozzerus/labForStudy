@@ -114,7 +114,9 @@ public class LabExperimentalDataModel01 extends AbstractLab<Integer> {
     @Override
     public String toString() {
         LabDTO<Integer> dto = getDTO();
-        return "Max value : " + dto.getMax() + "; Min value : " +dto.getMin()+ "; Standard value : " +standard+" Id = "+id+".";
+        StringBuilder builder = new StringBuilder();
+        builder.append("Max value : ").append(dto.getMax()).append("; Min value : ").append(dto.getMin()).append("; Standard value : ").append(standard).append(" Id = ").append(id);
+        return  builder.toString();
     }
 
     String getStringForWrite(){
