@@ -22,4 +22,6 @@ public interface LabInterface<T> extends Serializable {
 
     void write(Writer out);
 
+    Class<T> getGenericClass();
+
 }

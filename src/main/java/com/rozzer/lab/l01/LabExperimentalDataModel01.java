@@ -2,12 +2,11 @@ package com.rozzer.lab.l01;
 
 import com.google.common.collect.Lists;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class LabExperimentalDataModel01 implements LabInterface<Integer> {
+public class LabExperimentalDataModel01 extends AbstractLab<Integer> {
 
     private Integer[] array;
 
@@ -95,31 +94,8 @@ public class LabExperimentalDataModel01 implements LabInterface<Integer> {
     }
 
     @Override
-    public void output(OutputStream out) {
-        InputStream inputStream = new ByteArrayInputStream(this.toString().getBytes());
-        byte[] buffer = new byte[1000];
-        try {
-            while (inputStream.available() > 0)
-            {
-                int count = inputStream.read(buffer);
-                out.write(buffer, 0, count);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void write(Writer out) {
-        char[] charArray = this.toString().toCharArray();
-        try {
-            for (char symbol: charArray){
-                out.write(symbol);
-            }
-            out.write(this.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Class<Integer> getGenericClass() {
+        return Integer.class;
     }
 
     @Override
@@ -139,5 +115,9 @@ public class LabExperimentalDataModel01 implements LabInterface<Integer> {
     public String toString() {
         LabDTO<Integer> dto = getDTO();
         return "Max value : " + dto.getMax() + "; Min value : " +dto.getMin()+ "; Standard value : " +standard+" Id = "+id+".";
+    }
+
+    String getStringForWrite(){
+        return this.getId()+"/"+this.getStandard()+"/" +Arrays.toString(this.getArray()) +"/"+this.getClass().getName()+";"+"\n";
     }
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class LabExperimentalDataModel02 implements LabInterface<String> {
+public class LabExperimentalDataModel02 extends AbstractLab<String> {
 
     private String[] array;
 
@@ -103,6 +103,16 @@ public class LabExperimentalDataModel02 implements LabInterface<String> {
     public void write(Writer out) {
         throw new NotImplementedException();
 
+    }
+
+    @Override
+    String getStringForWrite() {
+        return this.getId()+"/"+this.getStandard()+"/" +Arrays.toString(this.getArray()) +"/"+this.getClass().getName()+";"+"\n";
+    }
+
+    @Override
+    public Class<String> getGenericClass() {
+        return String.class;
     }
 
     @Override

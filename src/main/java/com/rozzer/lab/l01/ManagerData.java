@@ -18,7 +18,7 @@ public class ManagerData {
         return INSTANCE;
     }
 
-    public void addNewExperiment(String className, Object[] array, Object standard, int id) throws NoClassForCreateException {
+    public LabInterface addNewExperiment(String className, Object[] array, Object standard, int id) throws NoClassForCreateException {
         try {
             Class<? extends LabInterface> loadClass = (Class<? extends LabInterface>) ClassLoader.getSystemClassLoader().loadClass(className);
             LabInterface instanceLab = (LabInterface) loadClass.newInstance();
@@ -26,12 +26,24 @@ public class ManagerData {
             instanceLab.setStandard(standard);
             instanceLab.setId(id);
             labData.add( instanceLab);
+            return instanceLab;
         } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new NoClassForCreateException("No class:" + className,e);
         }
+    }
 
+    public LabInterface getNewInstanceForClass(String className) throws NoClassForCreateException {
+        try {
+            Class<? extends LabInterface> loadClass = (Class<? extends LabInterface>) ClassLoader.getSystemClassLoader().loadClass(className);
+            LabInterface instanceLab = (LabInterface) loadClass.newInstance();
+            return instanceLab;
+        } catch (InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new NoClassForCreateException("No class:" + className,e);
+        }
     }
 
     public Collection<Pair<String, String>> getExperiments() {
