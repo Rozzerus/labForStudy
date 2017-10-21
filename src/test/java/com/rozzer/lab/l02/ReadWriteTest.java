@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class ReadWriteTest {
 
-    private static final String FILE = "c:/data.txt";
+    private static final String FILE = "d:/data.txt";
 
     @Test
     public void testRead() throws IOException {
