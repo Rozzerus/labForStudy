@@ -52,7 +52,7 @@ public class ManagerData {
 
         for (LabInterface lab:labData) {
             if(standardLab.equals(lab))
-            experiments.add(new Pair<String, String>(lab.getDTO().toString(),lab.getClass().getName()));
+                experiments.add(new Pair<String, String>(lab.getDTO().toString(),lab.getClass().getName()));
         }
         return experiments;
     }

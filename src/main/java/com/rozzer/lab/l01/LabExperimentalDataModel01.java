@@ -1,10 +1,8 @@
 package com.rozzer.lab.l01;
 
 import com.google.common.collect.Lists;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.io.OutputStream;
-import java.io.Writer;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -98,12 +96,30 @@ public class LabExperimentalDataModel01 implements LabInterface<Integer> {
 
     @Override
     public void output(OutputStream out) {
-        throw new NotImplementedException();
+        InputStream inputStream = new ByteArrayInputStream(this.toString().getBytes());
+        byte[] buffer = new byte[1000];
+        try {
+            while (inputStream.available() > 0)
+            {
+                int count = inputStream.read(buffer);
+                out.write(buffer, 0, count);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void write(Writer out) {
-        throw new NotImplementedException();
+        char[] charArray = this.toString().toCharArray();
+        try {
+            for (char symbol: charArray){
+                out.write(symbol);
+            }
+            out.write(this.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
