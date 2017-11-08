@@ -122,8 +122,10 @@ public class LabExperimentalDataModel02 extends AbstractLab<String> {
 
     @Override
     public boolean equals(Object obj) {
-        if (Objects.nonNull(obj) && obj.equals(id)){
-            return true;
+        if (Objects.nonNull(obj) && obj instanceof LabInterface) {
+            if (obj.equals(id)) {
+                return true;
+            }
         }
         return super.equals(obj);
     }
@@ -134,5 +136,13 @@ public class LabExperimentalDataModel02 extends AbstractLab<String> {
         StringBuilder builder = new StringBuilder();
         builder.append("Max value : ").append(dto.getMax()).append("; Min value : ").append(dto.getMin()).append("; Standard value : ").append(standard).append(" Id = ").append(id);
         return  builder.toString();
+    }
+
+    public Object clone(){
+        LabExperimentalDataModel02 model02 = new LabExperimentalDataModel02();
+        model02.setStandard(getStandard());
+        model02.setArray(getArray());
+        model02.setId(getId());
+        return model02;
     }
 }

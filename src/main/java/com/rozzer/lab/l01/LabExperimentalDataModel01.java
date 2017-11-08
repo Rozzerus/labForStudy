@@ -122,4 +122,12 @@ public class LabExperimentalDataModel01 extends AbstractLab<Integer> {
     String getStringForWrite(){
         return this.getId()+"/"+this.getStandard()+"/" +Arrays.toString(this.getArray()) +"/"+this.getClass().getName()+";"+"\n";
     }
+
+    public Object clone(){
+        LabExperimentalDataModel01 model01 = new LabExperimentalDataModel01();
+        model01.setStandard(getStandard());
+        model01.setArray(getArray());
+        model01.setId(getId());
+        return model01;
+    }
 }
