@@ -1,5 +1,7 @@
 package com.rozzer.lab.l01;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.io.*;
 
 public abstract class AbstractLab<T> implements LabInterface<T> {
@@ -26,6 +28,11 @@ public abstract class AbstractLab<T> implements LabInterface<T> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public Object clone() {
+        throw new NotImplementedException();
     }
 
     abstract String getStringForWrite();

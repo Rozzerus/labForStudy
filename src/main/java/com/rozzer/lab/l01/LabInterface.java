@@ -12,6 +12,12 @@ public interface LabInterface<T> extends Serializable, Cloneable {
 
     LabDTO<T> fitsTheCriteria(T maxValue, T minValue, T standardValue) throws NoCriteriaInSearchException;
 
+    T[] getArray();
+
+    T getStandard();
+
+    int getId();
+
     void setArray(T[] array);
 
     void setStandard(T standard);
@@ -23,5 +29,7 @@ public interface LabInterface<T> extends Serializable, Cloneable {
     void write(Writer out);
 
     Class<T> getGenericClass();
+
+    Object clone();
 
 }
