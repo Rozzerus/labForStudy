@@ -1,6 +1,6 @@
 package com.rozzer.lab.l02;
 
-import com.rozzer.lab.l01.LabInterface;
+import com.rozzer.lab.l01.Lab;
 import com.rozzer.lab.l01.ManagerData;
 import com.rozzer.lab.l01.NoClassForCreateException;
 
@@ -9,7 +9,7 @@ import java.io.*;
 public class InputOutputEngine {
 
 
-    public static void outputLabInterface(LabInterface o, OutputStream out){
+    public static void outputLabInterface(Lab o, OutputStream out){
         o.output(out);
         try {
             out.flush();
@@ -18,15 +18,15 @@ public class InputOutputEngine {
         }
     }
 
-    public static LabInterface inputLabInterface(InputStream in) throws IOException, NoClassForCreateException {
+    public static Lab inputLabInterface(InputStream in) throws IOException, NoClassForCreateException {
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
         return read(br);
     }
 
 
     private static Class validateClass(String s) throws NoClassForCreateException {
-        LabInterface labInterface = ManagerData.getInstance().getNewInstanceForClass(s);
-        return labInterface.getGenericClass();
+        Lab lab = ManagerData.getInstance().getNewInstanceForClass(s);
+        return lab.getGenericClass();
     }
 
     private static Object[] validateArray(String[] strArr, Class genericClazz) {
@@ -49,7 +49,7 @@ public class InputOutputEngine {
         }
     }
 
-    public static void writeLabInterface (LabInterface o, Writer out){
+    public static void writeLabInterface (Lab o, Writer out){
         o.write(out);
         try {
             out.flush();
@@ -58,7 +58,7 @@ public class InputOutputEngine {
         }
     }
 
-    public static LabInterface readLabInterface(Reader in) throws IOException, NoClassForCreateException {
+    public static Lab readLabInterface(Reader in) throws IOException, NoClassForCreateException {
         BufferedReader br = new BufferedReader(in);
         try {
             return read(br);
@@ -68,7 +68,7 @@ public class InputOutputEngine {
         return null;
     }
 
-    private static LabInterface read(BufferedReader br) throws IOException, NoClassForCreateException {
+    private static Lab read(BufferedReader br) throws IOException, NoClassForCreateException {
         String string = br.readLine().replace(";","");
         String[] field = string.split("/");
         if(field.length == 4){

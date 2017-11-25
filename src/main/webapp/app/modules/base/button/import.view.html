@@ -1,0 +1,63 @@
+<div>
+    <div class="row">
+        <div class="well col-md-4" ng-hide="importData.IsHaveConfigDAO">
+            <div>
+                <div style="float:right;">
+                    <button type="submit" class="btn btn-xs btn-primary" ng-click="upload()">
+                        <span class="glyphicon glyphicon-import"></span><span>Upload</span>
+                    </button>
+                    <button type="submit" class="btn btn-xs btn-warning" ng-click="clean()">
+                        <span>Remove</span>
+                    </button>
+                </div>
+                <input type="file" id="fileJaxB"/>
+            </div>
+            <div ng-repeat="file in files" style="margin-top: 20px;border-bottom-color: antiquewhite;border-bottom-style: double;">
+                <div><span>{{file.name}}</span><div style="float:right;"><span>{{file.humanSize}}</span><a title="Remove from list to be uploaded"><i class="icon-remove"></i></a></div>
+                </div>
+                <progress style="width:400px;" value="{{file.loaded}}" max="{{file.size}}"></progress>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label class="checkbox-inline"><input type="checkbox" ng-model="importData.IsHaveConfigDAO">The config on the server in DAO folder</label>
+        </div>
+        <div class="col-md-4">
+            <font color="red">NOTE:</font> The file format have be file.zip/DAO
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"><label class="btn btn-primary" ng-model="importData.importType" uib-btn-radio="'importAll'">Import all</label></div>
+        <div class="col-md-2" >
+            <label class="btn btn-primary" ng-model="importData.importType" uib-btn-radio="'importOfType'">Import of type</label>
+        </div>
+        <div class="col-md-4" ng-show="importData.importType=='importOfType'">
+            <div mockingbird-editable-select entity-name="type" array="$root.availableStorableTypes" current="importData" is-value-string="true"  ng-selection="changeType()" ></div>
+        </div>
+        <!--<input type="text" ng-model="importData.type" ng-change="changeType()"/>-->
+        <div class="col-md-1">
+            Prefix:
+        </div>
+        <div class="col-md-3">
+            <div mockingbird-editable-text entity-name="prefix" current="importData" class="clearfix"></div>
+            <font color="red">NOTE:</font> The prefix will be written in the names of all imported objects
+        </div>
+    </div>
+    <div class="row" ng-show="importData.importType=='importOfType'">
+        <div class="col-md-2">
+            <label class="checkbox-inline"><input type="checkbox" ng-model="importData.IsUnderParent">Import under parent</label>
+        </div>
+        <div class="col-md-4">
+            <div mockingbird-editable-select entity-name="parent" array="importData.availableParent" current="importData" is-value-link="true"></div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="importData.importType=='importOfType'">
+        <div class="col-md-2">
+            <label class="checkbox-inline"><input type="checkbox" ng-model="importData.IsWithDependencies">Import with dependencies</label>
+        </div>
+        <div class="col-md-2">
+            <label class="checkbox-inline"><input type="checkbox" ng-model="importData.IsWithChildren">Import with children</label>
+        </div>
+    </div>
+    <!--<uib-progressbar max="countAll+0" type = "info"  animate="true"  value="countFinished+0"><span style=" color:white; white-space:nowrap;">{{countAll}} / {{countFinished}}</span></uib-progressbar>-->
+</div>

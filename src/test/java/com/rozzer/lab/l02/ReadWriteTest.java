@@ -1,7 +1,7 @@
 package com.rozzer.lab.l02;
 
+import com.rozzer.lab.l01.Lab;
 import com.rozzer.lab.l01.LabExperimentalDataModel01;
-import com.rozzer.lab.l01.LabInterface;
 import com.rozzer.lab.l01.NoClassForCreateException;
 import org.junit.Test;
 
@@ -23,8 +23,8 @@ public class ReadWriteTest {
     @Test
     public void testReadBytes() throws IOException, NoClassForCreateException {
         FileInputStream fileInputStream = new FileInputStream(FILE);
-        LabInterface labInterface = InputOutputEngine.inputLabInterface(fileInputStream);
-        System.out.println(labInterface);
+        Lab lab = InputOutputEngine.inputLabInterface(fileInputStream);
+        System.out.println(lab);
         fileInputStream.close();
 
     }
@@ -42,8 +42,8 @@ public class ReadWriteTest {
     @Test
     public  void testReadString() throws IOException, NoClassForCreateException {
         FileReader fileInputStream = new FileReader(FILE);
-        LabInterface labInterface = InputOutputEngine.readLabInterface(fileInputStream);
-        System.out.println(labInterface);
+        Lab lab = InputOutputEngine.readLabInterface(fileInputStream);
+        System.out.println(lab);
         fileInputStream.close();
     }
 

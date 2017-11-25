@@ -12,7 +12,7 @@ public class ManagerDataTest {
     @Test
     public void testManager() throws NoClassForCreateException {
         ManagerData managerData = ManagerData.getInstance();
-        Collection<LabInterface> labData = managerData.getLabData();
+        Collection<Lab> labData = managerData.getLabData();
         assertTrue(labData.isEmpty());
         managerData.addNewExperiment(LabExperimentalDataModel01.class.getName(), new Integer[]{1,2,3} , 2, 1);
         managerData.addNewExperiment(LabExperimentalDataModel01.class.getName(), new Integer[]{1,2,3} , 4, 2);

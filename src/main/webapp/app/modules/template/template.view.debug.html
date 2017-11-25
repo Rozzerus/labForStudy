@@ -1,0 +1,195 @@
+<div ng-if="template.content" id="TemplateDebugger" class="modal fade" style="padding: 0 5px; position: inherit;">
+    <div class="modal-dialog modal-full-screen" style="position:absolute;top:0;left:0;z-index:999;">
+        <div class="modal-content" style="">
+
+            <div class="modal-header" style="text-align: center; padding: 7px; ">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click = "showDataSelect = false; option = '';">&times;</button>
+                <h4 class="modal-title"><b>[{{template.parent.name}}]</b> {{template.name}} - Debugger</h4>
+            </div>
+
+            <div class="modal-body" style="padding: 0 0 0 0; display: flex; min-height: 700px; max-height: 94.5vh;">
+                    <div class="container-fluid" style="padding:0 ;width: 100%; display: flex; ">
+                        <div class="row" style="margin:0; width: 100%; display: flex; padding: 0 10px 5px 10px;">
+
+                            <div id="resizableVariables"  class="col-md-3" style=" border-color: #4E7093; border-right: 1px ridge; overflow: hidden; display: flex; flex-direction: column; padding-right: 10px; justify-content: flex-start">
+
+                                <label>Select operational data and press load button:</label>
+                                <div class="row" style=" min-height: 8vh; display: flex;  margin: 4px 0 4px 5px; align-self: stretch">
+                                    <div class="inline-aligned" role="toolbar" style="text-align: left; flex-grow: 1; padding-right: 5px;">
+                                        <ui-select  ng-model="whatIsLoad.select" id="whatIsLoadSelect" theme="selectize" >
+                                            <ui-select-match style="padding: 3px 8px;" placeholder="Select or search...">{{$select.selected.name}}</ui-select-match>
+                                            <ui-select-choices repeat="option in whatIsLoad | filter: {name: $select.search}">
+                                                <span ng-bind-html="option.name | highlight: $select.search"></span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                    <div class="inline-aligned" role="toolbar" style="">
+                                        <button type="button" class="btn btn-success" href="" ng-click="loadData(whatIsLoad.select); showDataSelect = true; option = whatIsLoad.select.name; dataSources.select=''; showDatasetSelect = false; " data-toggle="" style="margin: 1px 0 0 0;">Load</button>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label ng-show="option == 'Dataset' ">Select dataset's file and press load button:</label>
+                                    <label ng-show="option == 'Callchain' ">Select callchain's context and press load button:</label>
+                                </div>
+
+                                <div ng-show="showDataSelect" class="row" style=" min-height: 8vh; display: flex;  margin: 4px 0 4px 5px; align-self: stretch">
+                                    <div class="inline-aligned" role="toolbar" style="text-align: left; flex-grow: 1; padding-right: 5px;">
+                                        <ui-select  ng-model="dataSources.select" id="dataSourceSelect" theme="selectize" >
+                                            <ui-select-match style="padding: 3px 8px;" placeholder="Select or search...">{{$select.selected.name}}</ui-select-match>
+                                            <ui-select-choices repeat="option in dataSources | filter: {name: $select.search}">
+                                                <span ng-bind-html="option.name | highlight: $select.search"></span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                    <div class="inline-aligned" role="toolbar" style="">
+                                        <button type="button" class="btn btn-success" href="" ng-click="loadDataSource(dataSources.select); showDatasetSelect = true;" data-toggle="" style="margin: 1px 0 0 0;">Load</button>
+                                    </div>
+                                </div>
+
+                                <div ng-show="option == 'Dataset' && showDatasetSelect">
+                                    <label>Select dataset and press load button:</label>
+                                    <div class="row" style=" min-height: 8vh; display: flex;  margin: 4px 0 4px 5px; align-self: stretch">
+                                        <div class="inline-aligned" role="toolbar" style="text-align: left; flex-grow: 1; padding-right: 5px;">
+                                            <ui-select  ng-model="dataSets.select" id="datasetSelect" theme="selectize" >
+                                            <ui-select-match style="padding: 3px 8px;" placeholder="Select or search...">{{$select.selected.name}}</ui-select-match>
+                                            <ui-select-choices repeat="option in dataSets | filter: {name: $select.search}">
+                                                <span ng-bind-html="option.name | highlight: $select.search"></span>
+                                            </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                        <div class="inline-aligned" role="toolbar" style="">
+                                            <button type="button" class="btn btn-success" href="" ng-click="loadDataSet(dataSets.select)" data-toggle="" style="margin: 1px 0 0 0;">Load</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="min-height: 5%; display: flex; margin: 4px 0 4px -15px;" ng-show="false">
+
+                                    <div class="inline-aligned" role="toolbar" style="text-align: left; flex-grow: 1; padding-right: 5px;">
+                                        <input type="text" class="form-control" placeholder="Filter variables"
+                                               ng-disabled="filterModes.select.toLowerCase() == 'default'"
+                                               ng-model="templateModel.filterText"
+                                               ng-change="setVariablesFilter(templateModel.filterText, templateModel.filterModes.select)">
+                                    </div>
+                                    <div class="" role="toolbar" style="text-align: left; margin: 2px 0 0 0; ">
+                                        <select class="form-control input-sm pull-right" id="filterMode"
+                                                ng-model="templateModel.filterModes.select"
+                                                ng-options="option for option in templateModel.filterModes.options"
+                                                ng-change="setVariablesFilter(templateModel.filterText, templateModel.filterModes.select)">
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <!--DO NOT DELETE IT. NEED IMPLEMENT FILTER-->
+                                <div class="row" style="flex-grow: 3; display: flex; flex-direction: column; margin: 4px 0 4px -15px; min-height: 20vh;"
+                                     ng-show="emptyVariables.length > 0">
+                                        <h5 class="sub-header">Empty variables</h5>
+                                    <div class="" style=" border: 1px solid rgb(238, 238, 238); border-radius: 3px; overflow-y: auto; overflow-x: hidden;">
+                                        <table class="table-responsive table-bordered table-condensed" style="word-break: break-all; width: 100%; ">
+                                            <tbody>
+                                            <tr class="ng-scope" ng-repeat="variable in emptyVariables | orderBy : '-source' track by variable.name">
+                                                <td>
+                                                    <a href="" data-backdrop="false" data-toggle="" class="ng-binding" ng-click="templateModel.goToVariable(variable);">{{variable.name}}</a>
+                                                    <div class="source-indicator" ng-show="variable.source"
+                                                         ng-class="{'data-set' : variable.source === 'DS' || variable.source === 'DATASET',
+                                                          'parsing-rule' : variable.source === 'PR' || variable.source === 'PARSING RULE',
+                                                           'undefined' : variable.source === 'UNDEF' || variable.source === 'UNDEFINED'}" title="{{variable.parents}}">
+                                                        {{variable.source}}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                                <!--DO NOT DELETE IT. NEED IMPLEMENT FILTER-->
+                                <div class="row" style="flex-grow: 2; display: flex; flex-direction: column; margin: 4px 0 4px -15px; min-height: 20vh;"
+                                     ng-show="filledVariables.length > 0">
+                                    <h5 class="sub-header">Used variables</h5>
+                                    <div class="" style=" border: 1px solid rgb(238, 238, 238); border-radius: 3px; overflow-y: auto; overflow-x: hidden;">
+                                        <table class="table-responsive table-bordered table-condensed" style="word-break: break-all; width: 100%; ">
+                                            <thead ng-show="loadedDataSource">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Value</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="ng-scope clickable" ng-repeat="variable in filledVariables | orderBy : 'source' track by variable.name"
+                                                ng-click="goToVariable(variable);"
+                                                onclick="var row = this; jQuery(row.parentElement).find('tr').removeClass('selected'); jQuery(row).addClass('selected');">
+                                                <td>
+                                                    <a href="" data-backdrop="false" data-toggle="" class="ng-binding">{{variable.name}}</a>
+                                                    <div class="source-indicator" ng-show="variable.source"
+                                                         ng-class="{'data-set' : variable.source === 'DS' || variable.source === 'DATASET',
+                                                          'parsing-rule' : variable.source === 'PR' || variable.source === 'PARSING RULE',
+                                                           'undefined' : variable.source === 'UNDEF' || variable.source === 'UNDEFINED'}" title="{{variable.parents}}">
+                                                        {{variable.source}}
+                                                    </div>
+                                                </td>
+                                                <td class="ng-binding" ng-show="loadedDataSource" style="max-width: 70%;">{{variable.value}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin: 4px 0 4px -15px; max-height: 100px; flex-grow: 1;" ng-show="loadedDataSource">
+                                    <textarea class="form-control ng-pristine ng-valid ng-not-empty ng-touched"
+                                              ng-model="variables.select.value"
+                                              readonly="readonly"
+                                              style="resize: none; height: 100%;"
+                                              placeholder="Variable's value"></textarea>
+                                </div>
+
+                            </div>
+
+                            <div id="templateContentEditor" class="col-md-9 mirror" style="padding: 0; display: flex; flex-direction: column;">
+
+                                <div id="editorsContainer" style="flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column;">
+                                    <div style="flex-grow: 1; display: flex; flex-direction: column; ">
+                                        <h5 class="sub-header" style="text-align: center; ">Content</h5>
+                                        <div id="contentEditorDebug" style="flex-grow: 1; " class="editor" ui-ace="aceOption" ng-model="template.content" ></div>
+                                    </div>
+                                    <div style="flex-grow: 1; display: flex; flex-direction: column; " ng-show="loadedDataSource">
+                                        <h5 class="sub-header" style="text-align: center; ">After execution</h5>
+                                        <div id="parsedEditorDebug" style="flex-grow: 1; " class="editor" ui-ace="aceOption" ng-model="mergedContent"></div>
+                                    </div>
+                                </div>
+
+                                <div class="panel-footer" style="display: inline-block; padding: 8px 0 0 10px; width: 100%;">
+                                        <div class="box pull-left">
+                                            <select class="form-control input-sm pull-right" id="templateEditorMode" ng-model="$root.availableModes.select"
+                                                    ng-options="option.name for option in $root.availableModes | orderBy:'name'"
+                                                    ng-change="changeEditorsMode();">
+                                            </select>
+                                        </div>
+
+                                        <div class="box pull-left" style="padding-left: 3px; ">
+                                            <button type="button" class="btn btn-xs btn-primary" ng-click="mergeContent(template)">Apply changes</button>
+                                            <button type="button" class="btn btn-xs btn-default" ng-click=""
+                                                    onclick="var container = document.getElementById('editorsContainer');
+                                                            if(container) {
+                                                                var newDirection = jQuery(container).css('flex-direction') == 'column' ? 'row' : 'column';
+                                                                jQuery(container).css('flex-direction', newDirection);
+                                                            }">Change view</button>
+                                            <button type="button" class="btn btn-default" ng-click="" ng-show="false">Sending Test</button>
+                                        </div>
+
+
+                                    <div class="pull-right">
+                                        <save-button endpoint="template" data="template" id="{{template.id}}" title="template save" dataclass="template"></save-button>
+                                        <reject-button ng-data="template" type="template" title="template reject"></reject-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+        </div>
+    </div>
+</div>

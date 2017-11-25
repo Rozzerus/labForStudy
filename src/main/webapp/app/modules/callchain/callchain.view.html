@@ -1,0 +1,33 @@
+<div ng-if="!isFolder">
+    <div class="panel-without-border panel-default" ng-if="chain.id != null">
+        <div class="panel-heading panel-heading-custom">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="btn-group">
+                        <run-button starter-object="chain" starter-type="callchain"></run-button>
+                        <button type="submit" class="btn btn-primary btn-md" ng-click="preview()"
+                                title="Preview Call Chain"><span
+                                class="glyphicon glyphicon-list"></span></button>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <main-property object="chain" type="callchain"></main-property>
+                </div>
+            </div>
+        </div>
+        <!--<div>-->
+            <!--<button type="button" class="btn btn-info" ng-click="viewHistory()">View History</button>-->
+        <!--</div>-->
+        <div class="panel-body" style=" padding: 0px; overflow-x: hidden; overflow-y: scroll; height:720px;">
+            <div class="panel-group">
+                <chain-steps-table parent="chain" panel-mode="true"></chain-steps-table>
+                <key-table parent="chain" panel-mode="true"></key-table>
+                <dataset-table parent="chain" panel-mode="true"></dataset-table>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-if="isFolder">
+    <folder-view folder="chain"></folder-view>
+</div>
+<watcher-for-data ng-data="chain"></watcher-for-data>

@@ -4,7 +4,7 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.io.Writer;
 
-public interface LabInterface<T> extends Serializable, Cloneable {
+public interface Lab<T> extends Serializable, Cloneable, Iterable, Comparable {
 
     T[] addToArrayAndGet(T nextValue);
 
@@ -32,4 +32,9 @@ public interface LabInterface<T> extends Serializable, Cloneable {
 
     Object clone();
 
+    double getElement(int i);
+
+    void setElement(int current, double val);
+
+    int getSize();
 }

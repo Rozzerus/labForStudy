@@ -1,0 +1,15 @@
+<div class="input-group">
+    <div class="input-group">
+        <div>
+            <span class="form-control">{{getFilename()}}</span>
+            <input id="{{'File_' + entity.id +'_'+property}}" ng-model="getFilename()" ng-model-options=" {getterSetter: true }" placeholder="Choose file" type="file"
+                   class="form-control" style='display: none' aria-label="..."
+                   onchange="angular.element(this).scope().changedFile()">
+        </div>
+        <div class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="setFile()">
+                <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+</div>

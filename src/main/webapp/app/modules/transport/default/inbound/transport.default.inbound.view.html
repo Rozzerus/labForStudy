@@ -1,0 +1,49 @@
+<transport-properties-table environment-mode="environmentMode"  transport="transport"></transport-properties-table>
+<div class="panel-group" ng-if="environmentMode">
+    <table class="table-striped"> <!--TODO SZ: this part is hidden from user, because currently we can't implement this functional-->
+        <!--TODO SZ: We need return there UIInboundTransport, it must extends UITransport(to avoid the duplication of code) and UIInboundTransportConfig.. -->
+        <!--TODO SZ: but we can't do that. -->
+        <thead>
+            <tr>
+                <th>
+                    <button type="submit" class="btn btn-xs btn-success" ng-click="addTrigger()"> <span class="glyphicon glyphicon-plus"></span></button>
+                </th>
+                <th class="col-md-12">
+                    <span>Triggers</span>
+                    <div style="width: 15%" class="pull-right">
+                        <div switch-group-button state="transport.state" array-triggers="transport.triggers" method="switchAllTriggers(transport)"></div>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr  ng-repeat="trigger in transport.triggers">
+                <td>
+                    <button type="submit" class="btn btn-xs btn-danger" ng-click="deleteTrigger(trigger)"> <span class="glyphicon glyphicon-remove"></span></button>
+                </td>
+                <td class="col-md-12" style=" padding: 0px;">
+                    <div >
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <div style=" height: 25px; ">
+                                        <div style="width: 45%" class="pull-left">
+                                            <div mockingbird-editable-text href-value="#ServerTrigger{{trigger.id}}-{{transport.id}}-{{$index}}" is-value-link="true" entity-name="name" current="trigger"></div>
+                                        </div>
+                                        <div style="width: 15%" class="pull-right">
+                                            <div class="col-md-8" switch-button global-trigger-state="trigger.state" method="switchTrigger(trigger)" ng-show="trigger.state != null"></div>
+                                            <span class="col-md-4"> <a uib-popover="{{trigger.error}}" id="dynamicPopoverTriggerStatus{{$index}}" popover-class="increase-popover-width" popover-placement="bottom-right" popover-title="Error" ng-show="trigger.state == 'Error'">(view)</a></span>
+                                        </div>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div id="ServerTrigger{{trigger.id}}-{{transport.id}}-{{$index}}" class="panel-collapse collapse">
+                                <transport-properties-table environment-mode="environmentMode" transport="trigger"></transport-properties-table>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

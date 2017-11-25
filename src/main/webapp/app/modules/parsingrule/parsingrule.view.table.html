@@ -1,0 +1,50 @@
+<table class="table table-striped small">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th class="col-md-5"><label style="color: red;">ParamName (*):</label></th>
+        <th class="col-md-1">As Multiple:</th>
+        <th class="col-md-1">As Autosave:</th>
+        <th class="col-md-1"><label style="color: red;">Type (*):</label></th>
+        <th class="col-md-5"><label style="color: red;">Expression (*):</label></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="parsingrule in (tableData|filter:tableSearch:false).slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))"><!-- for search: (tableData | filter : {name: tableSearch})-->
+        <td ng-if="parsingrule.isEdit"><input type="checkbox" disabled ng-model="parsingrule.selected"></td>
+        <td ng-if="parsingrule.isEdit" class="col-md-5"><input type="text" class="form-control" ng-model="parsingrule.paramName" ></td>
+        <td ng-if="parsingrule.isEdit" class="col-md-1">
+            <select class="form-control" id="multipleParsingRule" ng-model="parsingrule.multiple">
+                <option>true</option>
+                <option>false</option>
+            </select>
+        </td>
+        <td ng-if="parsingrule.isEdit" class="col-md-1">
+            <select class="form-control" id="asAutoSave" ng-model="parsingrule.autosave">
+                <option>true</option>
+                <option>false</option>
+            </select>
+        </td>
+        <td ng-if="parsingrule.isEdit" class="col-md-1">
+            <select class="form-control" id="typeParsingRule" ng-model="parsingrule.type" >
+                <option>Regex</option>
+                <option>Xpath</option>
+                <option>Regex URI</option>
+                <option>JSON Path</option>
+            </select>
+        </td>
+        <td ng-if="parsingrule.isEdit" class="col-md-5"><input type="text" class="form-control" ng-model="parsingrule.expression"></td>
+
+        <td ng-if="!parsingrule.isEdit"><input type="checkbox" ng-click="addToSelected($event, parsingrule)" ng-checked="checkedData.indexOf(parsingrule) > -1" ng-model="parsingrule.selected"></td>
+        <td ng-if="!parsingrule.isEdit" class="col-md-5">{{parsingrule.paramName}}</td>
+        <td ng-if="!parsingrule.isEdit" class="col-md-1">{{parsingrule.multiple}}</td>
+        <td ng-if="!parsingrule.isEdit" class="col-md-1">{{parsingrule.autosave}}</td>
+        <td ng-if="!parsingrule.isEdit" class="col-md-1">{{parsingrule.type}}</td>
+        <td ng-if="!parsingrule.isEdit" class="col-md-5">{{parsingrule.expression}}</td>
+        <td><parsingrule-edit parsing-rule="parsingrule"></parsingrule-edit></td>
+    </tr>
+    </tbody>
+</table>
+<div style="text-align: center;" ng-if="(tableData|filter:tableSearch:false).length > itemsPerPage">
+    <ul style="padding:0; margin: 0;" uib-pagination total-items="(tableData|filter:tableSearch:false).length" ng-change="updatePageIndexes(currentPage)" ng-model="currentPage" max-size="maxSize" class="pagination-sm" items-per-page="itemsPerPage" boundary-links="true" rotate="false"></ul>
+</div>

@@ -1,0 +1,19 @@
+<div ng-if="!isFolder">
+<div class="panel-without-border panel-default" ng-if="system.id != null">
+    <div class="panel-heading panel-heading-custom">
+        <main-property object="system" type="system"></main-property>
+    </div>
+    <div class="panel-body" style=" padding: 0px; overflow-x: hidden; overflow-y: scroll; max-height:720px;">
+            <div class="panel-group">
+                <transport-table panel-mode="true" parent="system"></transport-table>
+                <operation-table panel-mode="true" parent="system"></operation-table>
+                <parsingrule-table panel-mode="true" parent="system" parent-type="system"></parsingrule-table>
+                <context-definition  panel-mode="true" parent="system" parent-type="system"></context-definition>
+            </div>
+    </div>
+</div>
+</div>
+<div ng-if="isFolder">
+    <folder-view folder="system"></folder-view>
+</div>
+<watcher-for-data ng-data="system"></watcher-for-data>

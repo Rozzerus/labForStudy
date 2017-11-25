@@ -1,0 +1,122 @@
+<table class="table table-striped small">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th class="col-md-12">Data Set Sheets and Test Cases</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="dataset in tableData">
+        <td>
+            <input type="checkbox" ng-model="dataset.selected" ng-click="addToSelected($event, dataset)" ng-checked="checkedData.indexOf(dataset) > -1">
+        </td>
+        <td class="col-md-12">
+            <div class="row">
+                <div class="col-md-11" ng-if="!dataset.editing">
+                    <strong>{{dataset.name}}</strong>
+                    <br/>
+                    <small>
+                        filename: {{dataset.fileName}}
+                    </small>
+                </div>
+                <div class="col-md-1" ng-if="!dataset.editing">
+                    <a title="Edit data set sheet" class="edit-pencil pull-right"
+                            ng-click="$root.newData = {file: dataset.parent, dataset: dataset}; dataset.editing = true; $root.loadDataSetSources();"><span
+                            class="glyphicon glyphicon-pencil"></span></a>
+                </div>
+                <div class="col-md-5" ng-if="dataset.editing">
+                    <ui-select ng-model="$root.newData.file" theme="selectize" on-select="$root.newData.dataset = null; $root.getDataSetLists($root.newData.file.id, $root.newData)">
+                        <ui-select-match placeholder="Select or search...">{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices
+                                repeat="option in $root.availableDataSetSources | filter: {name: $select.search}">
+                            <div ng-bind-html="option.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="col-md-6" ng-if="dataset.editing">
+                    <ui-select ng-model="$root.newData.dataset" theme="selectize">
+                        <ui-select-match placeholder="Select or search...">{{$select.selected.name}}
+                        </ui-select-match>
+                        <ui-select-choices
+                                repeat="option in $root.newData.options | filter: {name: $select.search}">
+                            <div ng-bind-html="option.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="col-md-1" ng-if="dataset.editing">
+                    <div class="btn-group">
+                        <button type="button" title="Apply" class="btn btn-default btn-xs" ng-if="$root.newData.dataset != null && $root.newData.file != null"
+                                ng-click="tableData[$index] = $root.newData.dataset; $root.newData = {}; dataset.editing = false">
+                            <span class="glyphicon glyphicon-ok"></span></button>
+                        <button type="button" title="Cancel" class="btn btn-default btn-xs"
+                                ng-click="$root.newData = {}; dataset.editing = false"><span
+                                class="glyphicon glyphicon-remove"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-if="!dataset.editing">
+                <div class="col-md-12">
+                    <a href ng-click="dataset.expanded=true; $root.dsLoad(dataset, tableParentData)"
+                       ng-if="!dataset.expanded">Expand</a>
+                    <a href ng-click="dataset.expanded=false" ng-if="dataset.expanded">Collapse</a>
+                    <div ng-show="dataset.expanded && !dataset.list.loaded"><span
+                            class="glyphicon glyphicon-refresh gly-spin"></span> Loading...
+                    </div>
+                    <table class="table table-striped small" ng-show="dataset.expanded && dataset.list.loaded">
+                        <thead>
+                        <tr>
+                            <th width="50%">Data Set Name</th>
+                            <th width="25%">BulkValidator TestCase</th>
+                            <th width="25%">Exists in BulkValidator?</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="ds in dataset.list.data">
+                            <td>{{ds.name}}</td>
+                            <td>
+                                <div class="row" ng-hide="ds.bvLoading">
+                                    <div class="col-md-10" ng-if="!ds.bvCaseId">
+                                        <button type="button" title="Create BulkValidator TestCase"
+                                                class="btn btn-default btn-xs"
+                                                ng-click="$root.createBvCase(ds, tableParentData)">Create
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6" ng-if="ds.bvCaseId" ng-init="$root.getBvLink(ds)">
+                                        <a ng-if="ds.bvCaseLink" target="_blank" href="{{ds.bvCaseLink}}">Open BV Test Case</a>
+                                        <span ng-if="!ds.bvCaseLink">BV ID is {{ds.bvCaseId}}</span>
+                                    </div>
+                                    <div class="col-md-3" ng-if="ds.bvCaseId">
+                                        <button type="button" title="Read BV Etalon"
+                                                class="btn btn-default btn-xs"
+                                                ng-click="$root.readBvEtalon(ds, tableParentData)">Read
+                                        </button>
+                                    </div>
+                                    <div class="col-md-2" ng-if="ds.bvCaseId">
+                                        <button type="button" title="Unlink BV TestCase"
+                                                class="btn btn-default btn-xs"
+                                                ng-click="$root.unlinkBv(ds, tableParentData)"><span
+                                                class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="ds.bvLoading">
+                                    <span class="glyphicon glyphicon-refresh gly-spin"></span> Loading...
+                                </div>
+                            </td>
+                            <td>
+                                <div ng-show="ds.bvCaseExist">
+                                    <span class="glyphicon glyphicon-ok" style="font-size:13px; color: green;"></span>
+                                </div>
+                                <div ng-show="!ds.bvCaseExist">
+                                    <span class="glyphicon glyphicon-warning-sign" style="font-size:13px; color: red;"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>

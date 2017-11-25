@@ -1,0 +1,52 @@
+<div class="modal-content" id="extendable-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="close()">&times;</button>
+        <h4 class="ng-binding modal-title">Parameters to regenerate for '{{object.parent.name}}'</h4>
+    </div>
+    <div class="modal-body">
+        <watcher-for-data ng-data="object.keysToRegenerate"></watcher-for-data>
+        <div class="row" style="margin-left: 0px">
+            <span>
+                <button type="submit" class="btn btn-success btn-xs" ng-click="addKeyToRegnerate()">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                <button type="submit" class="btn btn-danger btn-xs" ng-click="deleteKeysToRegenerate()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+                <reject-button ng-array="object.keysToRegenerate" type="keys to regenerate" title="Reject Keys"></reject-button>
+            </span>
+        </div>
+        <div class="panel">
+            <table class="table table-striped small">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Key</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="keyToRegenerate in object.keysToRegenerate">
+                    <td>
+                        <input type="checkbox" ng-model="keyToRegenerate.selected"></td>
+                    <td>
+                        <div class="row" style="margin-right: 0px">
+                            <input type="text" class="form-control" placeholder="tc.Keys.paramName (no $)" style="{{keyToRegenerate.style}}" ng-model="keyToRegenerate.key" ng-blur="checkKeyValid(keyToRegenerate)" title="{{keyToRegenerate.title}}">
+                        </div>
+                        <div class="row" style="margin-right: 0px">
+                            <textarea class="form-control" placeholder="Simple value or template macro..." ng-model="keyToRegenerate.value"
+                                      style="resize:vertical"></textarea>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="btn-group">
+            <button type="submit" class="btn btn-info btn-sm" ng-click="close()">
+                <span class="glyphicon glyphicon-ok"></span> Apply
+            </button>
+        </div>
+    </div>
+</div>

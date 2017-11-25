@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class LabExperimentalDataModel01 extends AbstractLab<Integer> {
@@ -106,8 +107,8 @@ public class LabExperimentalDataModel01 extends AbstractLab<Integer> {
     @Override
     public boolean equals(Object obj) {
         if (Objects.nonNull(obj) && obj.equals(id)){
-            if (obj instanceof  LabInterface){
-                if (Arrays.equals(((LabInterface)obj).getArray(),getArray()) && ((LabInterface)obj).getStandard().equals(getStandard())) {
+            if (obj instanceof Lab){
+                if (Arrays.equals(((Lab)obj).getArray(),getArray()) && ((Lab)obj).getStandard().equals(getStandard())) {
                     return true;
                 }
             }
@@ -133,5 +134,30 @@ public class LabExperimentalDataModel01 extends AbstractLab<Integer> {
         model01.setArray(getArray().clone());
         model01.setId(getId());
         return model01;
+    }
+
+    @Override
+    public double getElement(int i) {
+        return 0;
+    }
+
+    @Override
+    public void setElement(int current, double val) {
+
+    }
+
+    @Override
+    public int getSize() {
+        return 0;
+    }
+
+    @Override
+    public Iterator iterator() {
+        return new LabIterator();
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return compare(this.hashCode(), o.hashCode());
     }
 }

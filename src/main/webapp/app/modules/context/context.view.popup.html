@@ -1,0 +1,181 @@
+<div class="col-md-6">
+    <div class="row">
+        <div class="col-md-6"><label>Name: {{context.name}}</label></div>
+        <div class="col-md-6"><label>Start Date: {{context.startTime}}</label></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6"><label>Initiator: {{context.initiator}}</label></div>
+        <div class="col-md-6"><label>Finish Date: {{context.endTime}}</label></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6"><label>Environment: {{context.environment}}</label></div>
+        <div class="col-md-6"><label>Status: {{context.status}}</label></div>
+    </div>
+    <button type="button" class="btn btn-sm btn-success" ng-click="refresh(context.id)"><span class="glyphicon glyphicon-refresh">Refresh</span></button>
+    <button type="button" class="btn btn-sm btn-danger" ng-click="pauseResume(context, 'PAUSED')" ng-disabled="context.status != 'In Progress'"><span class="glyphicon glyphicon-pause"> Pause</span></button>
+    <button type="button" class="btn-sm btn btn-info" ng-click="pauseResume(context, 'IN_PROGRESS')" ng-disabled="context.status != 'Paused'"><span class="glyphicon glyphicon-play"> Resume</span></button>
+
+</div>
+
+<div class="col-md-3">
+    <h3>External Links</h3>
+    <div ng-repeat="(key, value) in context.currentLink"><a target="_blank" ng-href="{{value}}">{{key}}</a></div>
+</div>
+
+<div class="col-md-3" style="height: 150px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" class="small"
+                   href="#collapseKeysContext">Keys</a>
+            </h4>
+        </div>
+        <div id="collapseKeysContext" class="panel-collapse collapse">
+
+            <table class="table table-striped small">
+                <thead>
+                <tr>
+                    <th>Key</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="key in context.currentKey">
+                    <td>{{key}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<br/>
+<div class="row">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="#executionView">Execution View</a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="#executionControl">Context View</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div id="executionView" class="tab-pane fade in active">
+            <div class="col-md-3" style="padding-right: 0px; padding-left: 0px;">
+                <div id="treeviewContext" style="height: 500px; overflow-y: auto;" class="small"></div>
+                <li ng-if="context.initiatorId != null && (context.status === 'Failed' || context.status === 'Stopped')" class="list-group-item node-treeviewContext" data-nodeid="999" style="height:60px">
+                    <div class="col-md-10">
+                        <combobox-for-steps initiator="{name: context.initiator, id: context.initiatorId}" result="selectedStepForPush"></combobox-for-steps>
+                    </div>
+                    <div class="col-md-2" ng-show="selectedStepForPush.data != null">
+                        <button type="submit" class="btn btn-xs btn-success" ng-click="pushCall()" style="position: absolute; right: 10px;">
+                            <span class="glyphicon glyphicon-play"></span>
+                            <span>Push</span>
+                        </button>
+                    </div>
+                </li>
+            </div>
+
+            <div class="col-md-9" style="height:560px; overflow-y: auto; padding-right: 0px; padding-left: 0px;">
+                <div class="panel panel-default" ng-show="selected">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" class="small"
+                               href="#collapseHeaders"><b><font color="#0000a0">Headers</font></b></a>
+                        </h4>
+                    </div>
+                    <div id="collapseHeaders" class="panel-collapse collapse">
+                        <table class="table table-striped small">
+                            <thead>
+                            <tr>
+                                <th width="30%">Name</th>
+                                <th>Value</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="(key, value) in context.currentHeadersMessage">
+                                <td>{{key}}</td>
+                                <td>{{value}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" class="small"
+                               href="#collapseMessageParameters"><b><font color="#0000a0">Message parameters</font></b></a>
+                        </h4>
+                    </div>
+                    <div id="collapseMessageParameters" class="panel-collapse collapse">
+                        <table class="table table-striped small">
+                            <thead>
+                            <tr>
+                                <th width="30%">Name</th>
+                                <th>Value</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="(key, value) in context.currentParametersMessage">
+                                <td>{{key}}</td>
+                                <td><span ng-repeat="single in value">{{single}}<br/></span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" class="small"
+                               href="#collapseConnectionParam"><b><font color="#0000a0">Connection parameters</font></b></a>
+                        </h4>
+                    </div>
+
+                    <div id="collapseConnectionParam" class="panel-collapse collapse">
+                        <table class="table table-striped small">
+                            <thead>
+                            <tr>
+                                <th width="30%">Name</th>
+                                <th>Value</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="(key, value) in context.currentConnectionParam">
+                                <td>{{key}}</td>
+                                <td>{{value}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="stepException" ng-if="context.currentException">
+                        <div class="panel panel-primary">
+                            <h4>{{context.currentException.errorName}}</h4>
+                            {{context.currentException.errorMessage}}
+                        </div>
+                    </div>
+                    <div id="stepMessage">
+                        <div class="panel panel-primary"
+                             ng-repeat="(key, val) in context.currentMessage">
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">{{key}}</div>
+                                <div class="panel-body">
+                                    <div class="editor" ui-ace="aceOption" ng-model="val"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div id="executionControl" class="tab-pane fade">
+            <div class="col-md-12" style="padding-right: 0px; padding-left: 0px;">
+                <div json-editor model="context.currentVariablesContext"
+                     options="{mode: 'tree', modes: ['tree', 'form','code','text'],history: false}"
+                     style="height: 450px;"></div>
+            </div>
+        </div>
+    </div>
+</div>

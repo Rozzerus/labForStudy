@@ -1,0 +1,71 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="panel-title pull-left">
+            <a data-toggle="collapse" data-parent="#accordion" href="#app_params_{{interceptor.id}}">Applicability Parameters</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div id="app_params_{{interceptor.id}}" class="panel-collapse collapse">
+        <div class="container-fluid">
+            <div class="row">
+                <br>
+                <div class="col-md-2">
+                    <button class="btn btn-xs btn-success"
+                            title="Add applicability parameters" ng-click="addApplicabilityParams()"
+                            data-toggle="modal"><span class="glyphicon glyphicon-plus"></span></button>
+                    <button class="btn btn-xs btn-success"
+                            title="Save applicability parameters" ng-click="saveApplicabilityParams()"
+                            data-toggle="modal"><span class="glyphicon glyphicon-floppy-disk"></span></button>
+                    <button class="btn btn-danger btn-xs"
+                            title="Delete applicability parameters" ng-click="deleteApplicabilityParams()"><span
+                            class="glyphicon glyphicon-trash"></span></button>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead>
+                        <th>&nbsp;&nbsp;&nbsp;</th>
+                        <th>Enviroment</th>
+                        <th>System</th>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="3">
+                                <div class="panel-group">
+                                    <div class="panel panel-default" ng-repeat = "params in interceptor.applicabilityParams">
+                                        <div class="panel-body">
+                                            <div class="col-sm-1">
+                                                <input type="checkbox" ng-model="params.isSelected">
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <ui-select ng-model="params.environment" theme="selectize" on-select="getOutboundSystemsFromEnvironment(params)">
+                                                    <ui-select-match placeholder="Select or search...">{{$select.selected.name}}</ui-select-match>
+                                                    <ui-select-choices
+                                                            repeat="option in availableEnvironments | filter: {name: $select.search}">
+                                                        <div ng-bind-html="option.name | highlight: $select.search"></div>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <ui-select ng-model="params.system" theme="selectize" on-select="">
+                                                    <ui-select-match placeholder="Select or search...">{{$select.selected.name}}</ui-select-match>
+                                                    <ui-select-choices
+                                                            repeat="option in availableSystems | filter: {name: $select.search}">
+                                                        <div ng-bind-html="option.name | highlight: $select.search"></div>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

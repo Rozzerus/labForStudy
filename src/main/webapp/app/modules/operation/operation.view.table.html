@@ -1,0 +1,40 @@
+<table class="table table-striped small">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th class="col-md-5">Name</th>
+        <th class="col-md-2">Transport</th>
+        <th class="col-md-5">Operation Definition Key</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--<tr data-ng-repeat="operation in tableData | orderBy:[filterSort]"-->
+        <!--data-ng-show="(filterSort(operation) == 1) && ($index >= firstIndex) && ($index < lastIndex)">-->
+    <tr ng-repeat="operation in tableData.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+        <td>
+        <input type="checkbox" ng-model="operation.selected" ng-click="addToSelected($event, operation)" ng-checked="checkedData.indexOf(operation) > -1">
+        </td>
+        <td class="col-md-5">
+            <a href ng-click="$root.openModal('operation', operation.id, true)">{{operation.name}}</a>
+        </td>
+        <td class="col-md-2">{{operation.transport.data.name}}</td>
+        <td class="col-md-5">{{operation.definitionKey.data.key}}</td>
+    </tr>
+    </tbody>
+</table>
+<div style="text-align: center;" ng-if="tableData.length > itemsPerPage">
+    <ul style="padding:0; margin: 0;"
+        uib-pagination
+        total-items="tableData.length"
+        ng-change="updatePageIndexes(currentPage)"
+        ng-model="currentPage"
+        max-size="maxSize"
+        class="pagination-sm"
+        items-per-page="itemsPerPage"
+        boundary-links="true"
+        rotate="false"></ul>
+</div>
+<label for="operationDefintion"><h5>Operation Definition:</h5></label>
+<textarea class="form-control" rows="3" id="operationDefintion" ng-model="tableParentData.operationDefinition.data"></textarea>
+<!--uib-pagination total-items="(tableData | filter:filterTable).length"-->
+<!--ng-change="updatePageIndexes()"-->

@@ -1,0 +1,80 @@
+<!--<div ng-hide="isOnlyView" class="btn-group pull-left">
+    <button ng-show="tableParentData.isInbound" type="submit" class="btn btn-info btn-xs" ng-click="increaseOrder()"><span class="glyphicon glyphicon-chevron-up"></span></button>
+    <button ng-show="tableParentData.isInbound" type="submit" class="btn btn-info btn-xs" ng-click="decreaseOrder()"><span class="glyphicon glyphicon-chevron-down"></span></button>
+</div>-->
+<table class="table table-striped small">
+    <thead>
+    <tr>
+        <th ng-hide="isOnlyView">#</th>
+        <th class="col-md-2">Name</th>
+        <th class="col-md-3"><div  ng-show="tableParentData.isInbound">Response</div><div  ng-hide="tableParentData.isInbound">Request</div></th>
+        <th class="col-md-4">Conditions</th>
+        <th class="col-md-3">Downstream Situation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="situation in (tableData|filter:tableSearch:false).slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))" id="{{situation.id}}" style="{{highlightRow(situation)}}">
+        <td ng-hide="isOnlyView"><input type="checkbox" ng-click="addToSelected($event, situation)"  ng-model="situation.selected"></td>
+        <td class="col-md-2">
+            <div mockingbird-editable-text entity-name="name" current="situation" class="clearfix" ng-class="situation.name==''?'btn-warning':'clearfix'" style="display: flow-root"></div>
+            <regeneratable-view object="situation"></regeneratable-view>
+        </td>
+        <td class="col-md-3">
+            <div class="clearfix row">
+                <div class="col-md-3">
+                    <label for="receiver-{{situation.id}}" ng-show="tableParentData.mep != 'inbound-request/response-synchronous'" style="color: red;">Receiver (*):</label>
+                </div>
+                <div class="col-md-9">
+                    <div class="wb-hack" id="receiver-{{situation.id}}" mockingbird-editable-select entity-type="system" entity-name="receiver" array="$root.availableSystems" current="situation" is-value-link="true" ng-show="tableParentData.mep != 'inbound-request/response-synchronous'"></div>
+                </div>
+            </div>
+            <div class="clearfix row">
+                <div class="col-md-3">
+                    <label for="operation-{{situation.id}}" ng-show="tableParentData.isInbound && tableParentData.mep != 'inbound-request/response-synchronous'">Operation:</label>
+                </div>
+                <div class="col-md-9">
+                    <div class="wb-hack" ng-show="tableParentData.isInbound && tableParentData.mep != 'inbound-request/response-synchronous'" id="operation-{{situation.id}}" mockingbird-editable-select entity-type="operation" entity-name="operation" array="$root.availableOperations" current="situation" is-value-link="true"></div>
+                </div>
+            </div>
+            <div class="clearfix row">
+                <div class="col-md-3">
+                    <label for="template-{{situation.id}}" style="color: red;">Template (*):</label>
+                </div>
+                <div class="col-md-9">
+                    <div class="wb-hack" id="template-{{situation.id}}" mockingbird-editable-select entity-type="template" entity-name="template" array="$root.availableTemplates" current="situation" is-value-link="true"></div>
+                </div>
+            </div>
+            <div class="clearfix row">
+                <div class="col-md-3">
+                    <label for="unit-{{situation.id}}">Unit:</label>
+                </div>
+                <div class="col-md-9">
+                    <div class="wb-hack" id="unit-{{situation.id}}" mockingbird-editable-select entity-name="unit" array="$root.availableUnit" current="situation" is-value-string="true"></div>
+                </div>
+            </div>
+            <div class="clearfix row">
+                <div class="col-md-3">
+                    <label for="delay-{{situation.id}}">Delay:</label>
+                </div>
+                <div class="col-md-9">
+                    <div class="wb-hack" mockingbird-editable-text entity-name="delay" min="0" current="situation"  is-value-number="true" id="delay-{{situation.id}}"></div>
+                </div>
+            </div>
+        </td>
+        <td class="col-md-4">
+            <div ng-if="!tableParentData.isInbound" condition-accordion array-triggers="situation.triggers" index="$index" ng-model="ngModel" is-inbound="parent.isInbound"></div>
+            <div ng-if="tableParentData.isInbound" condition-table array-condition="situation.triggers[0].condition"></div>
+        </td>
+        <td class="col-md-3">
+            <situation-on situation="situation" index="$index"></situation-on>
+        </td>
+        <td>
+            <!--<div ng-show="situation.triggers[0].type == 'Operation Event Trigger'" switch-button global-trigger-state="situation.triggers[0].state" method="switchTrigger(situation.triggers[0])"></div>-->
+            <situation-trigger trigger="situation.triggers[0]"></situation-trigger>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div style="text-align: center;" ng-init="updatePage()" ng-if="(tableData|filter:tableSearch:false).length > itemsPerPage">
+    <ul style="padding:0; margin: 0;" uib-pagination total-items="(tableData|filter:tableSearch:false).length" ng-change="updatePageIndexes(currentPage)" ng-model="currentPage" max-size="maxSize" class="pagination-sm" items-per-page="itemsPerPage" boundary-links="true" rotate="false"></ul>
+</div>

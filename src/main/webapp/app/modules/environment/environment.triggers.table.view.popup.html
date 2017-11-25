@@ -1,0 +1,44 @@
+<div id="TableViewPopup" class="modal fade modal-lg" style="z-index:20; left: 25%">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h3 class="modal-title">Triggers table view</h3>
+        </div>
+        <div class="modal-body">
+        <div ng-repeat="configuration in item.serverData.configurations">
+            <div class="col-md-10" ng-if="item.isInbound"><h4>#{{configuration.name}}</h4></div>
+            <table class="table table">
+                <thead>
+                    <tr>
+                        <th>
+                            <button type="submit" class="btn btn-xs btn-success" ng-click="addTrigger(configuration)"> <span class="glyphicon glyphicon-plus"></span></button>
+                        </th>
+                        <th class="col-md-12">
+                            <span>Triggers</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="trigger in configuration.triggers">
+                        <td>
+                            <button type="submit" class="btn btn-xs btn-danger" ng-click="deleteTrigger(trigger, configuration)"> <span class="glyphicon glyphicon-remove"></span></button>
+                        </td>
+                        <td>
+                            <div style="width: 45%" class="pull-left">
+                                <div mockingbird-editable-text href-value="#ServerTrigger{{trigger.id}}-{{transport.id}}-{{$index}}" is-value-link="false" entity-name="name" current="trigger"></div>
+                            </div>
+                            <div style="width: 30%" class="pull-right">
+                                <div class="col-md-8" switch-button global-trigger-state="trigger.state" method="switchTrigger(trigger, configuration)" ng-show="trigger.state != null"></div>
+                                <span class="col-md-4"> <a uib-popover="{{trigger.error}}" id="dynamicPopoverTriggerStatus{{$index}}" popover-class="increase-popover-width" popover-placement="bottom-right" popover-title="Error" ng-show="trigger.state == 'Error'">(view)</a></span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-success" ng-click="save()"  data-dismiss="modal" >Save</button>
+        </div>
+    </div>
+</div>

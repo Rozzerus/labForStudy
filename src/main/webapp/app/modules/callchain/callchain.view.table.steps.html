@@ -1,0 +1,29 @@
+<table class="table table-striped small">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Call</th>
+        <th>State</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="step in tableData">
+        <td class="col-md-0" ng-style="{ backgroundColor: {true:'inherit', false: '#f4cbcb' }[step.enabled]}"><input type="checkbox" ng-model="step.selected" ng-click="addToSelected($event, step)"
+                   ng-checked="checkedData.indexOf(step) > -1"></td>
+        <td class="col-md-12"ng-style="{ backgroundColor: {true:'inherit', false: '#f4cbcb' }[step.enabled]}">
+            <embedded-chain-step step="step" ng-if="step.type === 'embeddedChainStep'"></embedded-chain-step>
+            <situation-step step="step" ng-if="step.type === 'situationStep'"></situation-step>
+        </td>
+        <td class="1" ng-style="{ backgroundColor: {true:'inherit', false: '#f4cbcb' }[step.enabled]}">
+            <div style="display: grid">
+                <label for="isEnabled-{{step.id}}">Enabled:</label>
+                <switch id="isEnabled-{{step.id}}" name="isEnabled-{{step.id}}" ng-model="step.enabled"></switch>
+            </div>
+            <div style="display: grid">
+                <label for="isManual-{{step.id}}">Manual:</label>
+                <switch id="isManual-{{step.id}}" name="isManual-{{step.id}}" ng-model="step.manual"></switch>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>

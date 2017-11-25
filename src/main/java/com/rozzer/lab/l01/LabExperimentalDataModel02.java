@@ -7,43 +7,44 @@ import java.io.OutputStream;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Objects;
 
-public class LabExperimentalDataModel02 extends AbstractLab<String> {
+public class LabExperimentalDataModel02 extends AbstractLab<Double> {
 
-    private String[] array;
+    private Double[] array;
 
-    private String standard;
+    private Double standard;
 
     private int id;
 
     public LabExperimentalDataModel02() {
     }
 
-    public LabExperimentalDataModel02(String[] array, String standard, int id) {
+    public LabExperimentalDataModel02(Double[] array, Double standard, int id) {
         this.array = array;
         this.standard = standard;
         this.id = id;
     }
 
     @Override
-    public String[] addToArrayAndGet(String nextValue) {
+    public Double[] addToArrayAndGet(Double nextValue) {
         if (Objects.isNull(array)){
-            ArrayList<String> integers = Lists.newArrayList();
+            ArrayList<Double> integers = Lists.newArrayList();
             integers.add(nextValue);
-            array = integers.toArray(new String[integers.size()]);
+            array = integers.toArray(new Double[integers.size()]);
             return array;
         }
-        array = Lists.asList(nextValue, array).toArray(new String[array.length]);
+        array = Lists.asList(nextValue, array).toArray(new Double[array.length]);
         return array;
     }
 
     @Override
-    public LabDTO<String> getDTO() {
+    public LabDTO<Double> getDTO() {
         Arrays.sort(array);
-        String max = array[0];
-        String min = array[array.length-1];
-        for (String i: array) {
+        Double max = array[0];
+        Double min = array[array.length-1];
+        for (Double i: array) {
             if (i.equals(standard)){
                 return new LabDTO<>(max, min, true);
             }
@@ -52,11 +53,11 @@ public class LabExperimentalDataModel02 extends AbstractLab<String> {
     }
 
     @Override
-    public LabDTO<String> fitsTheCriteria(String maxValue, String minValue, String standardValue)  {
+    public LabDTO<Double> fitsTheCriteria(Double maxValue, Double minValue, Double standardValue)  {
         if (Objects.isNull(maxValue) && Objects.isNull(minValue) && Objects.isNull(standardValue)){
             throw new NoCriteriaInSearchException();
         }
-        LabDTO<String> dto = getDTO();
+        LabDTO<Double> dto = getDTO();
         if (Objects.nonNull(maxValue) && maxValue.equals(dto.getMax())){
             return dto;
         }
@@ -69,19 +70,19 @@ public class LabExperimentalDataModel02 extends AbstractLab<String> {
         return null;
     }
 
-    public String[] getArray() {
+    public Double[] getArray() {
         return array;
     }
 
-    public void setArray(String[] array) {
+    public void setArray(Double[] array) {
         this.array = array;
     }
 
-    public String getStandard() {
+    public Double getStandard() {
         return standard;
     }
 
-    public void setStandard(String standard) {
+    public void setStandard(Double standard) {
         this.standard = standard;
     }
 
@@ -111,8 +112,8 @@ public class LabExperimentalDataModel02 extends AbstractLab<String> {
     }
 
     @Override
-    public Class<String> getGenericClass() {
-        return String.class;
+    public Class<Double> getGenericClass() {
+        return Double.class;
     }
 
     @Override
@@ -123,8 +124,8 @@ public class LabExperimentalDataModel02 extends AbstractLab<String> {
     @Override
     public boolean equals(Object obj) {
         if (Objects.nonNull(obj) && obj.equals(id)){
-            if (obj instanceof  LabInterface){
-                if (Arrays.equals(((LabInterface)obj).getArray(),getArray()) && ((LabInterface)obj).getStandard().equals(getStandard())) {
+            if (obj instanceof Lab){
+                if (Arrays.equals(((Lab)obj).getArray(),getArray()) && ((Lab)obj).getStandard().equals(getStandard())) {
                     return true;
                 }
             }
@@ -134,7 +135,7 @@ public class LabExperimentalDataModel02 extends AbstractLab<String> {
 
     @Override
     public String toString() {
-        LabDTO<String> dto = getDTO();
+        LabDTO<Double> dto = getDTO();
         StringBuilder builder = new StringBuilder();
         builder.append("Max value : ").append(dto.getMax()).append("; Min value : ").append(dto.getMin()).append("; Standard value : ").append(standard).append(" Id = ").append(id);
         return  builder.toString();
@@ -146,5 +147,30 @@ public class LabExperimentalDataModel02 extends AbstractLab<String> {
         model02.setArray(getArray().clone());
         model02.setId(getId());
         return model02;
+    }
+
+    @Override
+    public double getElement(int i) {
+        return 0;
+    }
+
+    @Override
+    public void setElement(int current, double val) {
+
+    }
+
+    @Override
+    public int getSize() {
+        return 0;
+    }
+
+    @Override
+    public Iterator iterator() {
+        return new LabIterator();
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return compare(this.hashCode(), o.hashCode());
     }
 }

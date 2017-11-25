@@ -1,0 +1,26 @@
+<table class="table table-striped small">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Listen</th>
+        <th>Type</th>
+        <th>Event</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="trigger in tableData">
+        <td>
+            <input type="checkbox" ng-model="trigger.selected"><trigger-view-popup trigger="trigger"></trigger-view-popup>
+        </td>
+        <td>
+            <a ng-click="downloadObject(operation)" href="#Trigger{{trigger.id}}" data-backdrop="false" data-toggle="modal">{{trigger.name}}</a>
+        </td>
+        <td>{{trigger.listen.name}}</td>
+        <td>{{trigger.type}}</td>
+        <td>{{trigger.on}}</td>
+        <td><starter-trigger-button trigger="trigger"></starter-trigger-button></td>
+    </tr>
+    </tbody>
+</table>

@@ -1,0 +1,76 @@
+<div class="container">
+    <h3 style="text-align: center">External tools integrations settings
+        <span class="pull-right">
+            <select ng-model="newName" class="form-control form-control-inline">
+                <option ng-repeat="type in integrTypes" value="{{type}}">
+                    {{type}}
+                </option>
+            </select>
+            <button ng-class="newName === '' ? 'disabled' : 'enabled'" type="button" class="btn btn-success pull-right" ng-click="create(newName)">Add</button>
+        </span>
+    </h3>
+    <div class="row">
+        <div class="panel-group" id="integrations">
+            <div class="panel panel-default" ng-repeat-start="configuration in configurations">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <div style=" overflow:auto; ">
+                            <div style="width: 45%" class="pull-left">
+                                <a href="#{{configuration.id}}-{{$index}}" data-toggle="collapse">{{configuration.name}}</a>
+                            </div>
+                            <div style="width: 15%" class="pull-right">
+                                <button type="button" class="btn btn-xs btn-danger pull-right"
+                                        ng-click="delete(configuration)">delete
+                                </button>
+                            </div>
+                        </div>
+                    </h4>
+                </div>
+                <div id="{{configuration.id}}-{{$index}}" data-parent="integrations" class="panel-collapse collapse">
+                    <div class="container-fluid">
+                        <table class="table table-striped small">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>
+                                    Value
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="(name, value) in configuration.properties">
+                                <td>
+                                    {{value.userName}}
+                                    <div ng-if="value.userName === 'Bulk Validator URL'"><label style="color: red;">{{msgUrl}} (*):</label></div>
+                                    <div ng-if="value.userName === 'Source Name'" ><label style="color: red;">{{msgSource}} (*):</label></div>
+                                    <div ng-if="value.userName === 'Test Case Type'"><label style="color:red">{{msgType}} (*):</label></div>
+                                </td>
+                                <td>
+                                    <div ng-if="value.select == 'true'">
+                                        <div mockingbird-editable-select is-value-string="true" entity-name="value"
+                                             array="value.options" current="value"></div>
+                                    </div>
+                                    <input ng-if="value.inputType === 'string' && value.select == 'false'" type="text"
+                                           placeholder="{{value.description}}" class="form-control"
+                                           ng-model="value.value">
+                                    <textarea
+                                            ng-if="(value.inputType === 'list' || value.inputType === 'map') && value.select == 'false'"
+                                            class="form-control" rows="2" placeholder="{{value.description}}"
+                                            ng-model="value.value"></textarea>
+                                    <div ng-if="value.inputType === 'boolean'"><switch id="bool-{{value.name}}" name="bool-{{value.name}}" ng-model="value.boolValue"></switch></div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <button type="button" class="btn btn-success pull-right"
+                                    ng-click="save(configuration)">Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-repeat-end></div>
+        </div>
+    </div>
+</div>

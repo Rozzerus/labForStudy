@@ -1,0 +1,13 @@
+<div class="row">
+    <uib-tabset active="currentTabIndex">
+        <uib-tab  ui-sref="callchain"  ui-sref-active="active" index="0" heading="Call Chain"></uib-tab>
+        <uib-tab  ui-sref="system"  ui-sref-active="active" index="1" heading="System"></uib-tab>
+        <uib-tab  ui-sref="template"  ui-sref-active="active" index="2" heading="Template"></uib-tab>
+        <uib-tab  ui-sref="environment"  ui-sref-active="active" index="3" heading="Environment"></uib-tab>
+        <uib-tab  ui-sref="monitoring"  ui-sref-active="active" index="4" heading="Monitoring"></uib-tab>
+        <uib-tab ui-sref="integrations" ui-sref-active="active" index="5" heading="Integrations"
+                 class="pull-right"></uib-tab>
+        <uib-tab ui-sref="logs" ui-sref-active="active" index="6" heading="Logs" class="pull-right"></uib-tab>
+    </uib-tabset>
+    <ui-view></ui-view>
+</div>

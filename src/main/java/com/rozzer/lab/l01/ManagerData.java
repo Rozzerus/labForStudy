@@ -7,7 +7,7 @@ import java.util.Collection;
 
 public class ManagerData {
 
-    private final Collection<LabInterface> labData = Lists.newArrayList();
+    private final Collection<Lab> labData = Lists.newArrayList();
 
     private static ManagerData INSTANCE = new ManagerData();
 
@@ -18,10 +18,10 @@ public class ManagerData {
         return INSTANCE;
     }
 
-    public LabInterface addNewExperiment(String className, Object[] array, Object standard, int id) throws NoClassForCreateException {
+    public Lab addNewExperiment(String className, Object[] array, Object standard, int id) throws NoClassForCreateException {
         try {
-            Class<? extends LabInterface> loadClass = (Class<? extends LabInterface>) ClassLoader.getSystemClassLoader().loadClass(className);
-            LabInterface instanceLab = (LabInterface) loadClass.newInstance();
+            Class<? extends Lab> loadClass = (Class<? extends Lab>) ClassLoader.getSystemClassLoader().loadClass(className);
+            Lab instanceLab = (Lab) loadClass.newInstance();
             instanceLab.setArray(array);
             instanceLab.setStandard(standard);
             instanceLab.setId(id);
@@ -34,10 +34,10 @@ public class ManagerData {
         }
     }
 
-    public LabInterface getNewInstanceForClass(String className) throws NoClassForCreateException {
+    public Lab getNewInstanceForClass(String className) throws NoClassForCreateException {
         try {
-            Class<? extends LabInterface> loadClass = (Class<? extends LabInterface>) ClassLoader.getSystemClassLoader().loadClass(className);
-            LabInterface instanceLab = (LabInterface) loadClass.newInstance();
+            Class<? extends Lab> loadClass = (Class<? extends Lab>) ClassLoader.getSystemClassLoader().loadClass(className);
+            Lab instanceLab = (Lab) loadClass.newInstance();
             return instanceLab;
         } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
@@ -49,23 +49,31 @@ public class ManagerData {
     public Collection<Pair<String, String>> getExperiments() {
         Collection<Pair<String, String>> experiments = Lists.newArrayList();
 
-        for (LabInterface lab:labData) {
+        for (Lab lab:labData) {
             experiments.add(new Pair<String, String>(lab.toString(),lab.getClass().getName()));
         }
         return experiments;
     }
 
-    public Collection<LabInterface> getLabData() {
+    public Collection<Lab> getLabData() {
         return labData;
     }
 
-    public Collection<Pair<String, String>> getSameExperiments(LabInterface standardLab){
+    public Collection<Pair<String, String>> getSameExperiments(Lab standardLab){
         Collection<Pair<String, String>> experiments = Lists.newArrayList();
 
-        for (LabInterface lab:labData) {
+        for (Lab lab:labData) {
             if(standardLab.equals(lab))
                 experiments.add(new Pair<String, String>(lab.getDTO().toString(),lab.getClass().getName()));
         }
         return experiments;
+    }
+
+    public static Lab unmodifiable(Lab о) throws UnsupportedOperationException {
+        return null;/*What need to do */
+    }
+
+    public Lab synchronizedLab (Lab i){
+        return null;
     }
 }

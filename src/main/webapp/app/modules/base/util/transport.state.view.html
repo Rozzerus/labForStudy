@@ -1,0 +1,18 @@
+<table class="table table-striped small">
+    <thead>
+    <tr>
+        <th class="col-md-6">Name</th>
+        <th class="col-md-3">State</th>
+        <th class="col-md-2">Usage Info</th>
+        <th class="col-md-1">Properties</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="transport in transports">
+        <td class="col-md-6">{{transport.userName}}</td>
+        <td class="col-md-3">{{transport.state}}</td>
+        <td class="col-md-2">{{transport.usageInfo}}</td>
+        <td class="col-md-1">{{transport.properties.length}}</td>
+    </tr>
+    </tbody>
+</table>

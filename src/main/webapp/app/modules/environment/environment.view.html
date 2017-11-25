@@ -1,0 +1,29 @@
+<div>
+    <div class="container-fluid" style="padding:0;">
+        <div class="row" style="margin:0;">
+            <table style="width: 100%; margin: 0px 0px 50px">
+                <tbody>
+                <tr>
+                    <td valign="top" style="width: 60%; min-width: 230px">
+                        <!--Environment-->
+                        <div id="resizableEnvironment"  style=" border-right-style: ridge; border-right-width: 1px; border-color: #4E7093; width: 100%">
+                            <div style=" padding: 10px;">
+                                <button type="button"  class="btn btn btn-xs btn-success" ng-click="environmentModel.addEnvironment()">Add Environment</button>
+                            </div>
+                            <div custom-accordion-for-environment ng-model="environmentModel" collapse-panel-id="collapse-panel-environment" collapse-panel-body-id="collapse-panel-body-environment"></div>
+                        </div>
+                        <environment-item-popup item="environmentModel.currentEnvironmentItem"></environment-item-popup>
+                        <table-view-popup item="environmentModel.currentEnvironmentItem"></table-view-popup>
+                    </td>
+                    <td  valign="top">
+                        <!--Servers-->
+                        <div id="mirrorEnvironment"  style="padding: 0px; width: 100%">
+                            <div custom-table-for-server ng-model="environmentModel"></div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
