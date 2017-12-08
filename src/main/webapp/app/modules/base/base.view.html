@@ -1,31 +1,4 @@
-<div id="wrapper">
-	<div id="page-content-wrapper" style="padding: 0px; position: relative;">
-		<div class="container-fluid" style="padding: 0px;">
-			<div class="row">
-				<nav class="navbar navbar-default">
-					<div class="container-fluid">
-						<div class="col-md-5" style="padding: 0px;">
-							<a class="navbar-brand" href="/" onclick="window.location.href = '/'">
-								<img src = "./resources/logo.png" width = "110"></a>
-						</div>
-						<div class="col-md-2" style="padding: 0px;">
-							<a ><h4 style="font-style:italic; font-family:fantasy; color:#4E7093; " >Mockingbird</h4></a><span>{{$root.birdM}}</span>
-						</div>
-						<ul class="nav navbar-nav pull-right col-md-5" style="padding: 0px; padding-right: 50px">
-							<li><a onclick="window.open('/buildInfo')" href="#">BuildInfo</a></li>
-							<li><a onclick="window.open('/converter/converter.html')" href="#">Converter</a></li>
-							<li><a onclick="window.open('/postbird/postbird.html')" href="#">Postbird</a></li>
-							<li><a ng-click="$root.loadStates()" data-backdrop="false" data-toggle="modal" href="#Popup-TransportState">Transport state <transport-state-icon state="$root.transportState"></transport-state-icon></a>
-								<transport-state-view transports="$root.transports" state="$root.transportState"></transport-state-view></li>
-							<li style="padding-top: 15px"><export-button  with-text="true" title="export files" /></li>
-							<li style="padding-top: 15px; padding-left: 5px"><import-button  with-text="true" title="import files" /></li>
-						</ul>
-					</div>
-				</nav>
-			</div>
-			<container></container>
-
-		</div>
-	</div>
-	<mockingbird-method></mockingbird-method>
+<div>
+    <button id="connect" ng-click="ctrl.connect();">Connect</button>
+    <button id="disconnect"  ng-click="ctrl.disconnect();">Disconnect</button>
 </div>

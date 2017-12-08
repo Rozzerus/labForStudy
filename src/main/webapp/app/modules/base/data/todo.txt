@@ -1,2 +1,0 @@
-1. Create aggregator submodules like starter_aggregator which would contain $starterchain, $starter, $startertree. To avoid overhead in data.service.
-2. Add inheritance in submodules, which loads some data. Like most of services do a same operation like getAll() but the different part is only endpoint.
