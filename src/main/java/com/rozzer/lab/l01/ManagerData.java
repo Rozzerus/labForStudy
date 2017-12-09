@@ -1,11 +1,12 @@
 package com.rozzer.lab.l01;
 
 import com.google.common.collect.Lists;
+import com.rozzer.lab.l04.LabFactory;
 import javafx.util.Pair;
 
 import java.util.Collection;
 
-public class ManagerData {
+public class ManagerData implements LabFactory {
 
     private final Collection<Lab> labData = Lists.newArrayList();
 
@@ -34,7 +35,7 @@ public class ManagerData {
         }
     }
 
-    public Lab getNewInstanceForClass(String className) throws NoClassForCreateException {
+    public Lab createInstance(String className) throws NoClassForCreateException {
         try {
             Class<? extends Lab> loadClass = (Class<? extends Lab>) ClassLoader.getSystemClassLoader().loadClass(className);
             Lab instanceLab = (Lab) loadClass.newInstance();

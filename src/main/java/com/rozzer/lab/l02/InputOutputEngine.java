@@ -25,7 +25,7 @@ public class InputOutputEngine {
 
 
     private static Class validateClass(String s) throws NoClassForCreateException {
-        Lab lab = ManagerData.getInstance().getNewInstanceForClass(s);
+        Lab lab = ManagerData.getInstance().createInstance(s);
         return lab.getGenericClass();
     }
 
