@@ -41,11 +41,11 @@ public class InputOutputEngine {
         return numArr;
     }
 
-    private static Object validateStandard(String s, Class genericClazz){
+    private static Number validateStandard(String s, Class genericClazz){
         try {
             return new Integer(s);
         } catch (Exception e){
-            return s;
+            throw new RuntimeException("standard is not valid");
         }
     }
 
@@ -73,7 +73,7 @@ public class InputOutputEngine {
         String[] field = string.split("/");
         if(field.length == 4){
             Class clazz = validateClass(field[3]);
-            Object[] validArray = validateArray(field[2].replace("[","").replace("]","").replace(" ","").split(","), clazz);
+            Number[] validArray = (Number[]) validateArray(field[2].replace("[","").replace("]","").replace(" ","").split(","), clazz);
             return ManagerData.getInstance().addNewExperiment(field[3],validArray, validateStandard(field[1],clazz),new Integer(field[0]));
         } else {
             throw new CanNotReadObjectException();

@@ -7,7 +7,7 @@ import java.lang.reflect.Array;
 import java.util.Iterator;
 import java.util.function.Consumer;
 
-public abstract class AbstractLab<T> implements Lab<T> {
+public abstract class AbstractLab<T extends Number> implements Lab<T> {
 
     @Override
     public void output(OutputStream out) {
@@ -40,9 +40,14 @@ public abstract class AbstractLab<T> implements Lab<T> {
 
     abstract String getStringForWrite();
 
-    final class LabIterator implements Iterator<T> {
-        private Object array;
-        private int currentIndex = 0;
+    class LabIterator<T> implements Iterator<T> {
+        private T[] array;
+        private int currentIndex;
+
+        public LabIterator(T[] array) {
+            this.array = array;
+            this.currentIndex =0;
+        }
 
         @Override
         public boolean hasNext() {
@@ -50,7 +55,7 @@ public abstract class AbstractLab<T> implements Lab<T> {
         }
 
         public final T next() {
-            return (T) Array.get(array, currentIndex++);
+            return (T) Array.get(array, this.currentIndex++);
         }
 
         @Override
@@ -64,8 +69,18 @@ public abstract class AbstractLab<T> implements Lab<T> {
         }
     }
 
-    public static int compare(int x, int y) {
+
+    @Override
+    public int compareTo(Object o) {
+        if (o instanceof Lab){
+            return comparing(this.hashCode(), o.hashCode());
+        }
+        return 0;
+    }
+
+    public int comparing(int x, int y) {
         return (x < y) ? -1 : ((x == y) ? 0 : 1);
     }
+
 
 }

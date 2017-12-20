@@ -8,7 +8,7 @@ import java.io.OutputStream;
 import java.io.Writer;
 import java.util.Iterator;
 
-public class ImmutableLab<T> implements Lab<T> {
+public class ImmutableLab<T extends Number> implements Lab<T> {
 
     private Lab<T> lab;
 

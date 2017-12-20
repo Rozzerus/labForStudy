@@ -17,8 +17,8 @@ public class ManagerDataTest {
         managerData.addNewExperiment(LabExperimentalDataModel01.class.getName(), new Integer[]{1,2,3} , 2, 1);
         managerData.addNewExperiment(LabExperimentalDataModel01.class.getName(), new Integer[]{1,2,3} , 4, 2);
         managerData.addNewExperiment(LabExperimentalDataModel01.class.getName(), new Integer[]{1,4,3} , 5, 2);
-        managerData.addNewExperiment(LabExperimentalDataModel02.class.getName(), new String[]{"a", "b", "c"} , "a", 3);
-        managerData.addNewExperiment(LabExperimentalDataModel02.class.getName(), new String[]{"a", "b", "c"} , "d", 4);
+        managerData.addNewExperiment(LabExperimentalDataModel02.class.getName(), new Double[]{2.3, 2.4, 2.4} , 2.3, 3);
+        managerData.addNewExperiment(LabExperimentalDataModel02.class.getName(), new Double[]{2.6, 2.7, 2.8} , 2.3, 4);
         Collection<Pair<String, String>> experiments = managerData.getExperiments();
         for (Pair<String, String> pair:experiments){
             System.out.println(pair.getKey());

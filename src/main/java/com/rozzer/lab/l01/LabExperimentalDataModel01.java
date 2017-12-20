@@ -153,11 +153,8 @@ public class LabExperimentalDataModel01 extends AbstractLab<Integer> {
 
     @Override
     public Iterator iterator() {
-        return new LabIterator();
+        return new LabIterator<>(array);
     }
 
-    @Override
-    public int compareTo(Object o) {
-        return compare(this.hashCode(), o.hashCode());
-    }
+
 }

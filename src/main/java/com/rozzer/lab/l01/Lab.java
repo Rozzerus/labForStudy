@@ -4,7 +4,7 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.io.Writer;
 
-public interface Lab<T> extends Serializable, Cloneable, Iterable, Comparable {
+public interface Lab<T extends Number> extends Serializable, Cloneable, Iterable, Comparable {
 
     T[] addToArrayAndGet(T nextValue);
 

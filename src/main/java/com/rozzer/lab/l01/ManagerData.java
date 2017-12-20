@@ -6,12 +6,19 @@ import com.rozzer.lab.l04.LabFactory;
 import javafx.util.Pair;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class ManagerData implements LabFactory {
 
-    private final Collection<Lab> labData = Lists.newArrayList();
+    private final List<Lab> labData = Lists.newArrayList();
 
     private static ManagerData INSTANCE = new ManagerData();
+
+    private Comparator idComparator = new LabComparatorId();
+
+    private Comparator standardComparator = new LabComparatorStandard();
 
     private ManagerData() {
     }
@@ -20,7 +27,7 @@ public class ManagerData implements LabFactory {
         return INSTANCE;
     }
 
-    public Lab addNewExperiment(String className, Object[] array, Object standard, int id) throws NoClassForCreateException {
+    public Lab addNewExperiment(String className, Number[] array, Number standard, int id) throws NoClassForCreateException {
         try {
             Class<? extends Lab> loadClass = (Class<? extends Lab>) ClassLoader.getSystemClassLoader().loadClass(className);
             Lab instanceLab = (Lab) loadClass.newInstance();
@@ -71,11 +78,40 @@ public class ManagerData implements LabFactory {
         return experiments;
     }
 
+
+    public Collection<Lab> sortFromStandart(){
+        Collections.sort(labData, standardComparator);
+        return labData;
+    }
+
+    public Collection<Lab> sortFromId(){
+        Collections.sort(labData, idComparator);
+        return labData;
+    }
+
     public static Lab unmodifiable(Lab lab) {
         return new ImmutableLab(lab);
     }
 
     public Lab synchronizedLab (Lab i){
         return null;
+    }
+
+
+    class LabComparatorId<T extends Lab> implements Comparator<T> {
+
+        @Override
+        public int compare(T o1, T o2) {
+            return o1.getId()-o2.getId();
+        }
+    }
+
+    class LabComparatorStandard<T extends Lab> implements Comparator<T> {
+
+        @Override
+        public int compare(T o1, T o2) {
+            return  o1.getStandard().intValue()-o2.getStandard().intValue();
+        }
+
     }
 }
