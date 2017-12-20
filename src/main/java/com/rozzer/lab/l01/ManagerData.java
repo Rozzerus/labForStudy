@@ -1,6 +1,7 @@
 package com.rozzer.lab.l01;
 
 import com.google.common.collect.Lists;
+import com.rozzer.lab.l04.ImmutableLab;
 import com.rozzer.lab.l04.LabFactory;
 import javafx.util.Pair;
 
@@ -70,8 +71,8 @@ public class ManagerData implements LabFactory {
         return experiments;
     }
 
-    public static Lab unmodifiable(Lab о) throws UnsupportedOperationException {
-        return null;/*What need to do */
+    public static Lab unmodifiable(Lab lab) {
+        return new ImmutableLab(lab);
     }
 
     public Lab synchronizedLab (Lab i){

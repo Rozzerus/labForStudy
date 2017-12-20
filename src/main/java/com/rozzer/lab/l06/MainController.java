@@ -15,16 +15,16 @@ public class MainController {
         private SimpMessagingTemplate simpMessagingTemplate;
 
         @MessageMapping("/lab")
-        public void receiveColor(Lab lab){
-            System.out.println("message.getColorString() = " + lab.toString());
+        public void receive(Lab lab){
+            System.out.println("message.getLabString() = " + lab.toString());
         }
 
 
         @Scheduled(fixedDelay = 1000)
-        private void bgColor(){
+        private void send(){
             for (Lab lab:  ManagerData.getInstance().getLabData()) {
                 simpMessagingTemplate.convertAndSend("/topic/lab", lab);
-                System.out.println("Send color: " + lab.toString());
+                System.out.println("Send lab: " + lab.toString());
             }
         }
 

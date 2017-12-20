@@ -5,15 +5,12 @@ import com.rozzer.lab.l01.LabExperimentalDataModel02;
 import com.rozzer.lab.l01.ManagerData;
 import com.rozzer.lab.l05.ReadThread;
 import com.rozzer.lab.l05.WriteThread;
-import javafx.util.Pair;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.socket.config.annotation.AbstractWebSocketMessageBrokerConfigurer;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
-
-import java.util.Collection;
 
 
 @SpringBootApplication
@@ -44,10 +41,6 @@ public class Main extends AbstractWebSocketMessageBrokerConfigurer {
             }
         });
         writeThread.start();
-    }
-
-    public static Collection<Pair<String, String>> getExperiments() {
-        return ManagerData.getInstance().getExperiments();
     }
 
     @Override
