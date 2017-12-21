@@ -8,7 +8,7 @@ import java.io.OutputStream;
 import java.io.Writer;
 import java.util.Iterator;
 
-public class ImmutableLab<T> implements Lab<T> {
+public class ImmutableLab<T extends Number> implements Lab<T> {
 
     private Lab<T> lab;
 
@@ -82,12 +82,12 @@ public class ImmutableLab<T> implements Lab<T> {
     }
 
     @Override
-    public double getElement(int i) {
+    public Number getElement(int i) {
         return lab.getElement(i);
     }
 
     @Override
-    public void setElement(int current, double val) {
+    public void setElement(int current, Number val) {
         throw new UnsupportedOperationException();
     }
 

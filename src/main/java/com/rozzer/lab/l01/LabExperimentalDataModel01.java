@@ -137,27 +137,24 @@ public class LabExperimentalDataModel01 extends AbstractLab<Integer> {
     }
 
     @Override
-    public double getElement(int i) {
-        return 0;
+    public Number getElement(int i) {
+        return array[i];
     }
 
     @Override
-    public void setElement(int current, double val) {
-
+    public void setElement(int current, Number val) {
+        array[current] = val.intValue();
     }
 
     @Override
     public int getSize() {
-        return 0;
+        return array.length;
     }
 
     @Override
     public Iterator iterator() {
-        return new LabIterator();
+        return new LabIterator<>(array);
     }
 
-    @Override
-    public int compareTo(Object o) {
-        return compare(this.hashCode(), o.hashCode());
-    }
+
 }

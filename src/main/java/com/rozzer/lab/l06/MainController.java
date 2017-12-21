@@ -15,8 +15,8 @@ public class MainController {
         private SimpMessagingTemplate simpMessagingTemplate;
 
         @MessageMapping("/lab")
-        public void receive(Lab lab){
-            System.out.println("message.getLabString() = " + lab.toString());
+        public void receive(String message){
+            System.out.println("message: " + message);
         }
 
 

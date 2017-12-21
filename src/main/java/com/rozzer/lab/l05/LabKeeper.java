@@ -12,30 +12,47 @@ public class LabKeeper {
         this.i = i;
     }
 
-    public double read() throws InterruptedException {
-        double val;
+    public Number read() throws InterruptedException {
+        Number val;
         synchronized(lock) {
             if (!canRead()) throw new InterruptedException();
             while (!set)
                 lock.wait();
             val = i.getElement(current++);
-            System.out.println("Read: " + val);
-            set = false;
+            System.out.println("Read: " + val +" from position " + current);
+//            set = false;
             lock.notifyAll();
         }
         return val;
     }
 
-    public void write(double val) throws InterruptedException {
+    public void write(Number val) throws InterruptedException {
         synchronized(lock) {
             if (!canWrite()) throw new InterruptedException();
             while (set)
                 lock.wait();
-            i.setElement(current, val);
-            System.out.println("Write: " + val);
-            set = true;
+            this.current++;
+            i.setElement(current-1, val);
+            System.out.println("Write: " + i.getElement(this.current-1) + " from position " + this.current);
+//            set = true;
             lock.notifyAll();
         }
+    }
+
+    public boolean isSet() {
+        return set;
+    }
+
+    public void setSet(boolean set) {
+        this.set = set;
+    }
+
+    public int getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(int current) {
+        this.current = current;
     }
 
     public boolean canRead() {
