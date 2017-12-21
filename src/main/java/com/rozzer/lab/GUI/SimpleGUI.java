@@ -11,6 +11,12 @@ public class SimpleGUI extends JFrame {
 
     private JButton button = new JButton("Add Data");
 
+    private JRadioButton rButton = new JRadioButton("R");
+
+    private JRadioButton gButton = new JRadioButton("G");
+
+    private JRadioButton dButton = new JRadioButton("D");
+
     private JButton guessButton = new JButton("Guess");
 
     private JLabel label = new JLabel("Input:");
@@ -30,6 +36,8 @@ public class SimpleGUI extends JFrame {
     private JTextField maxInput = new JTextField("", 5);
 //    private JTextField input = new JTextField("", 5);
 
+    Container container;
+
     private int random_number;
 
     private JTable table = new JTable();
@@ -42,10 +50,13 @@ public class SimpleGUI extends JFrame {
     }
 
     private SimpleGUI() throws HeadlessException {
+
+
+
         super("Simple Example");
         this.setBounds(100,100,450,400);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Container container = this.getContentPane();
+        container = this.getContentPane();
         container.setLayout(new GridLayout(10,20,2,3));
         Dimension dimension = new Dimension(1, 1);
         dimension.setSize(0.5, 1);
@@ -80,6 +91,41 @@ public class SimpleGUI extends JFrame {
 
         container.add(result);
 
+
+        rButton.setActionCommand("R");
+        rButton.setSelected(true);
+
+        gButton.setActionCommand("G");
+
+        dButton.setActionCommand("D");
+
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(rButton);
+        group.add(gButton);
+        group.add(dButton);
+
+        container.add(rButton);
+        container.add(gButton);
+        container.add(dButton);
+
+        rButton.addActionListener(new RadioLis());
+        gButton.addActionListener(new RadioLis());
+        dButton.addActionListener(new RadioLis());
+
+
+    }
+
+    private class RadioLis implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if(e.getActionCommand().equals("G")) {
+                container.setBackground(new Color(0, 225, 0));
+            } else if(e.getActionCommand().equals("R")) {
+                container.setBackground(new Color(225, 0, 0));
+            } else if(e.getActionCommand().equals("D")) {
+                container.setBackground(new Color(0, 0, 0));
+            }
+        }
 
     }
 
