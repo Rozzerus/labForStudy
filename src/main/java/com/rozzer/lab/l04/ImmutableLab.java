@@ -82,12 +82,12 @@ public class ImmutableLab<T extends Number> implements Lab<T> {
     }
 
     @Override
-    public double getElement(int i) {
+    public Number getElement(int i) {
         return lab.getElement(i);
     }
 
     @Override
-    public void setElement(int current, double val) {
+    public void setElement(int current, Number val) {
         throw new UnsupportedOperationException();
     }
 

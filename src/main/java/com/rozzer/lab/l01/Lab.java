@@ -32,9 +32,9 @@ public interface Lab<T extends Number> extends Serializable, Cloneable, Iterable
 
     Object clone();
 
-    double getElement(int i);
+    Number getElement(int i);
 
-    void setElement(int current, double val);
+    void setElement(int current, Number val);
 
     int getSize();
 }

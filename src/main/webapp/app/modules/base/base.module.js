@@ -22,13 +22,18 @@ define([
                 $scope.ctrl.connect = function() {
                     var socket = new SockJS('/lab');
                     $scope.stompClient = Stomp.over(socket);
-                    $scope.stompClient.connect({}, function(frame) {
-                        $scope.setConnected(true);
-                        console.log('Connected: ' + frame);
-                        $scope.stompClient.subscribe('/topic/lab', function(object){
-                            console.log('Set');
-                        });
-                    });
+                    $scope.stompClient.connect({},
+                        function(frame) {
+                            $scope.setConnected(true);
+                            console.log('Connected: ' + frame);
+                            $scope.stompClient.subscribe('/topic/lab', function(object){
+                                console.log('Set');
+                            });
+                        },
+                        function() {
+                            $scope.stompClient.send("/lab", {}, JSON.stringify('Client message : connected'));
+                        }
+                    );
                 };
 
                 $scope.ctrl.disconnect = function() {
@@ -40,7 +45,7 @@ define([
                 };
 
                 $scope.ctrl.sendColor = function(color) {
-                    $scope.stompClient.send("/lab", {}, JSON.stringify({ 'colorString': color }));
+                    $scope.stompClient.send("/lab", {}, JSON.stringify({ 'String': "" }));
                 };
 
 
