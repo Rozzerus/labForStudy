@@ -38,7 +38,7 @@ public class SimpleGUI extends JFrame {
 
     Container container;
 
-    private int random_number;
+    private Integer random_number;
 
     private JTable table = new JTable();
 
@@ -156,10 +156,17 @@ public class SimpleGUI extends JFrame {
 
     private class GButtonEventListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            String s = "";
+            int i = random_number.compareTo(Integer.parseInt(input.getText()));
+            if (i > 0){
+                s = " need more";
+            } else {
+                s = " need less";
+            }
             if (random_number == Integer.parseInt(input.getText())){
                 result.setText("CHITING!!!");
             } else {
-                result.setText("Fail");
+                result.setText("Fail" + s);
             }
             result.setVisible(true);
         }
