@@ -149,7 +149,7 @@ public class SimpleGUI extends JFrame {
             guessButton.setVisible(true);
             label.setVisible(true);
             input.setVisible(true);
-            random_number = Integer.parseInt(minInputText) + (int) (Math.random() * Integer.parseInt(maxInputText));
+            random_number = (int) Math.round((Integer.parseInt(maxInputText)+Integer.parseInt(minInputText))/2);
             result.setVisible(false);
         }
     }
@@ -157,7 +157,7 @@ public class SimpleGUI extends JFrame {
     private class GButtonEventListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if (random_number == Integer.parseInt(input.getText())){
-                result.setText("Success");
+                result.setText("CHITING!!!");
             } else {
                 result.setText("Fail");
             }
