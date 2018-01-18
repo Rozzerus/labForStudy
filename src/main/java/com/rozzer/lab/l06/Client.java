@@ -14,63 +14,56 @@ import java.net.UnknownHostException;
 
 public class Client {
 
-        private String ipAddress;
+        private String ip;
         private int port;
 
-        public Client(String ipAddress, int port) {
-            this.ipAddress = ipAddress;
+        public Client(String ip, int port) {
+            this.ip = ip;
             this.port = port;
 
         }
         public void process() {
             try {
-                InetAddress host = InetAddress.getByName(ipAddress);
+                InetAddress host = InetAddress.getByName(ip);
                 Socket s = new Socket(host, port);
                 processRequest(s);
             } catch (UnknownHostException ex) {
-                System.out.println(
-                        "Невозможно установить соединение");
+                System.out.println("Connection is fail:" + ex.getMessage());
             } catch (IOException ex) {
-                System.out.println(
-                        "Ошибка ввода/вывода в ходе работы");
+                System.out.println("I/O Exception: ");
+                ex.printStackTrace();
             } catch (ClassNotFoundException ex) {
-                System.out.println("Неизвестный класс отклика");
+                System.out.println("ClassNotFoundException: " + ex.getMessage());
             }
         }
 
-        private void processRequest(Socket s) throws IOException, ClassNotFoundException {
-            ObjectOutputStream out = new
-                    ObjectOutputStream(s.getOutputStream());
-            ObjectInputStream in = new
-                    ObjectInputStream(s.getInputStream());
+        private void processRequest(Socket socket) throws IOException, ClassNotFoundException {
+            ObjectOutputStream outputStream = null;
+            ObjectInputStream inputStream = null;
+            try {
+                outputStream = new ObjectOutputStream(socket.getOutputStream());
+                inputStream = new ObjectInputStream(socket.getInputStream());
 
-            //DataInputStream answerIn = new DataInputStream(s.getInputStream());
+                Lab lab;
+                outputStream.writeObject(true);
+                lab = new LabExperimentalDataModel01(new Integer[]{2, 3, 4, 5}, 2, 1);
+                outputStream.writeObject(lab);
+                System.out.println("Send: " + lab.toString());
 
-            Object obj;
-            Lab lab;
-            Double servAnswer;
+                outputStream.flush();
 
-            out.writeObject(true);
-            Integer[] quantity = {2,3,4,5};
-            lab = new LabExperimentalDataModel01(quantity, 2, 1);
-            out.writeObject(lab);
-            System.out.println("Send: " + lab.toString());
+                Integer answer = inputStream.readInt();
+                System.out.println("Receive: sended object's id : " + answer.toString());
+            } finally {
+                Util.closing(inputStream);
+                Util.closing(outputStream);
+                Util.closing(socket);
+            }
 
-            out.flush();
-
-            servAnswer = in.readDouble();
-            System.out.println("Receive: " + servAnswer.toString());
-
-            in.close();
-            out.close();
-            s.close();
         }
         public static void main(String[] args) {
             Client client = new Client("localhost",4320);
-
             client.process();
-
-
         }
 
 
