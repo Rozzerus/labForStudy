@@ -39,7 +39,7 @@ public class ManagerData implements LabFactory {
         } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
-            throw new NoClassForCreateException("No class:" + className,e);
+            throw new NoClassForCreateException("No class:  " + className,e);
         }
     }
 
