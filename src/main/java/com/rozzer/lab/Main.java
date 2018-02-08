@@ -48,8 +48,8 @@ public class Main extends AbstractWebSocketMessageBrokerConfigurer {
                         keeper.setSet(true);
                     }
                 });
-                writeThread.setPriority(Thread.MAX_PRIORITY);
-                writeThread.start();
+                writeThread.setPriority(Thread.MIN_PRIORITY);
+
 
                 ReadThread readThread = new ReadThread(new Runnable() {
                     @Override
@@ -64,8 +64,10 @@ public class Main extends AbstractWebSocketMessageBrokerConfigurer {
                         keeper.setSet(false);
                     }
                 });
-                readThread.setPriority(Thread.MIN_PRIORITY);
-                readThread.start();
+                readThread.setPriority(Thread.MAX_PRIORITY);
+
+                readThread.start(); writeThread.start();
+
         });
 
     }

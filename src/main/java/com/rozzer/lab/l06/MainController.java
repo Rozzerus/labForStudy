@@ -14,7 +14,7 @@ public class MainController {
         @Autowired
         private SimpMessagingTemplate simpMessagingTemplate;
 
-        @MessageMapping("/lab")
+        @MessageMapping("/lab/message")
         public void receive(String message){
             System.out.println("message: " + message);
         }

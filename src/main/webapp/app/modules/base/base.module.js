@@ -31,7 +31,7 @@ define([
                             });
                         },
                         function() {
-                            $scope.stompClient.send("/lab", {}, JSON.stringify('Client message : connected'));
+                            $scope.stompClient.send("/lab", {priority: 9}, "Hello, STOMP");
                         }
                     );
                 };
@@ -44,8 +44,8 @@ define([
                     console.log("Disconnected");
                 };
 
-                $scope.ctrl.sendColor = function(color) {
-                    $scope.stompClient.send("/lab", {}, JSON.stringify({ 'String': "" }));
+                $scope.ctrl.send = function() {
+                    $scope.stompClient.send("/lab/message", {}, JSON.stringify(ctrl.meassage));
                 };
 
 
