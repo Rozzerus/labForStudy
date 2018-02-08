@@ -1,0 +1,40 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE Employee SYSTEM "group.dtd">
+<bookcase>
+	<bookshelves>
+		<bookshelf number="1">
+			<books>
+				<book title="book1" >
+					<intro pages="10"/>
+					<chapters>
+						<chapter title="chapter1" pages="595"/>
+						<chapter title="chapter2" pages="595"/>
+					</chapters>
+					<pages>1200</pages>
+				</book>
+				<book title="book2" >
+					<intro pages="10"/>
+					<chapter title="chapter1" pages="595"/>
+					<chapter title="chapter2" pages="595"/>
+					<pages>1200</pages>
+				</book>
+			</books>
+		</bookshelf>
+		<bookshelf number="2">
+			<books>
+				<book title="book3" >
+					<intro pages="10"/>
+					<chapter title="chapter1" pages="595"/>
+					<chapter title="chapter2" pages="595"/>
+					<pages>1200</pages>
+				</book>
+				<book title="book4" >
+					<intro pages="10"/>
+					<chapter title="chapter1" pages="595"/>
+					<chapter title="chapter2" pages="595"/>
+					<pages>1200</pages>
+				</book>
+			</books>
+		</bookshelf>
+	</bookshelves>
+</bookcase>
