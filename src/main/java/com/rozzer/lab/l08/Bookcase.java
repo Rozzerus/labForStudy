@@ -1,22 +1,21 @@
 package com.rozzer.lab.l08;
 
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
-@XmlRootElement
+@XmlRootElement(name = "bookcase")
 public class Bookcase {
 
-    @XmlElementWrapper(name = "bookshelves")
+    private List<Bookshelf> bookshelfs;
+
+    public List<Bookshelf> getBookshelfs() {
+        return bookshelfs;
+    }
+
     @XmlElement(name = "bookshelf")
-    private List<Bookshelf> bookshelf;
-
-    public List<Bookshelf> getBookshelf() {
-        return bookshelf;
+    public void setBookshelfs(List<Bookshelf> bookshelfs) {
+        this.bookshelfs = bookshelfs;
     }
 
-    public void setBookshelf(List<Bookshelf> bookshelf) {
-        this.bookshelf = bookshelf;
-    }
 }
