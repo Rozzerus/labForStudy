@@ -1,4 +1,4 @@
-package com.rozzer.lab.l08;
+package com.rozzer.lab.l08.objects;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
