@@ -17,7 +17,8 @@ public class JAXBReader {
             jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             Bookcase bookcase = (Bookcase) jaxbUnmarshaller.unmarshal(file);
             Bookshelf bookshelf = bookcase.getBookshelfs().iterator().next();
-            System.out.println(bookshelf.getNumber());
+            String value = bookshelf.getBooks().iterator().next().getPages().getValue();
+            System.out.println(value);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
