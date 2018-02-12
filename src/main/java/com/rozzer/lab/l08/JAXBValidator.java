@@ -24,7 +24,7 @@ public class JAXBValidator {
         String sum = String.valueOf(count(book.getChapters(), book.getIntro()));
         Pages bookPages = book.getPages();
         if (bookPages != null) {
-            if (sum.equals(bookPages.getValue()))
+            if (!sum.equals(bookPages.getValue()))
                 bookPages.setValue(sum);
         } else {
             bookPages = new Pages();

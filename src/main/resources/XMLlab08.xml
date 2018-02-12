@@ -5,13 +5,12 @@
 					<intro pages="10"/>
 					<chapter title="chapter1" pages="595"/>
 					<chapter title="chapter2" pages="595"/>
-					<pages>1200</pages>
 				</book>
 				<book title="book2" >
 					<intro pages="10"/>
 					<chapter title="chapter1" pages="595"/>
 					<chapter title="chapter2" pages="595"/>
-					<pages>1200</pages>
+					<pages>300</pages>
 				</book>
 		</bookshelf>
 		<bookshelf number="2">
@@ -19,13 +18,13 @@
 					<intro pages="10"/>
 					<chapter title="chapter1" pages="595"/>
 					<chapter title="chapter2" pages="595"/>
-					<pages>1200</pages>
+					<pages>900</pages>
 				</book>
 				<book title="book4" >
 					<intro pages="10"/>
 					<chapter title="chapter1" pages="595"/>
 					<chapter title="chapter2" pages="595"/>
-					<pages>1200</pages>
+					<pages>1100</pages>
 				</book>
 		</bookshelf>
 </bookcase>
