@@ -4,8 +4,10 @@ import com.rozzer.lab.l08.objects.Bookcase;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import java.io.File;
+import javax.xml.bind.Marshaller;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 public class JAXBWriter {
 
@@ -19,14 +21,16 @@ public class JAXBWriter {
     }
 
     public Bookcase write(Bookcase bookcase, String fileName){
-        try {
-            File file = new File(fileName);
-            JAXBContext jaxbContext = JAXBContext.newInstance(Bookcase.class);
-            Unmarshaller jaxbUnmarshaller = null;
-            jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            return (Bookcase) jaxbUnmarshaller.unmarshal(file);
-        } catch (JAXBException e) {
-            throw new RuntimeException(e);
+        try{
+            JAXBContext jc = JAXBContext.newInstance(Bookcase.class);
+            Marshaller m = jc.createMarshaller();
+            OutputStream os = new FileOutputStream(fileName);
+            m.marshal(bookcase, os);
+            os.close();
         }
+        catch (JAXBException | IOException e) {
+            e.printStackTrace();
+        }
+        return bookcase;
     }
 }
