@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Client {
 
-    private  Scanner sc = new Scanner(System.in);
+    private  Scanner scanner = new Scanner(System.in);
 
     private final static Client CLIENT = new Client();
 
@@ -33,9 +33,9 @@ public class Client {
 
     private Point queryData(){
         System.out.print("x1:");
-        double x = sc.nextDouble();
+        double x = scanner.nextDouble();
         System.out.print("y1:");
-        double y = sc.nextDouble();
+        double y = scanner.nextDouble();
         return new Point(x, y);
     }
 }

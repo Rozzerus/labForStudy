@@ -24,6 +24,7 @@ public class JAXBWriter {
         try{
             JAXBContext jc = JAXBContext.newInstance(Bookcase.class);
             Marshaller m = jc.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             OutputStream os = new FileOutputStream(fileName);
             m.marshal(bookcase, os);
             os.close();
