@@ -1,12 +1,36 @@
 <web-app>
 
     <servlet>
-        <servlet-name>buildInfo</servlet-name>
-        <jsp-file>/buildInfo.jsp</jsp-file>
+        <servlet-name>view</servlet-name>
+        <jsp-file>/view.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>editor</servlet-name>
+        <jsp-file>/editor.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>searching</servlet-name>
+        <jsp-file>/searching.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>log</servlet-name>
+        <jsp-file>/log.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>buildInfo</servlet-name>
-        <url-pattern>/buildInfo/*</url-pattern>
+        <servlet-name>view</servlet-name>
+        <url-pattern>/view/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editor</servlet-name>
+        <url-pattern>/editor/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>searching</servlet-name>
+        <url-pattern>/searching/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>log</servlet-name>
+        <url-pattern>/log/*</url-pattern>
     </servlet-mapping>
 
 </web-app>

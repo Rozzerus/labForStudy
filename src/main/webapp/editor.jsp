@@ -15,12 +15,9 @@
     try {
         File file = new File(absPath);
         String jspFolder = file.getParentFile().getAbsolutePath();
-        /* TODO SZ: NO! don't read the version from txt file, what if tomorrow someone remove it?
-        *  set version throw the Maven/Resource check how it work for version.jsp!
-        */
+
         String buildInfoFile = jspFolder + "/version.txt";
         StringBuilder sb = new StringBuilder();
-        //TODO SZ: Don't create bicycle, just use FileUtils from apache.common.io, or java.io.Files.
         FileInputStream fileinputstream = new FileInputStream(buildInfoFile);
         int numberBytes = fileinputstream.available();
         byte bytearray[] = new byte[numberBytes];
@@ -32,11 +29,6 @@
         fileinputstream.close();
         version = sb.toString();
     } catch(Exception ex) {
-        /* TODO SZ: never do like this.
-         * If you can avoid exception avoid it! Because exception is performance killer.
-         * As you can see above, you can check that file exist or not and in case it does not exist
-         * just return the message below without generation the exception.
-         */
         version = "version info file not found";
     }
 %>
