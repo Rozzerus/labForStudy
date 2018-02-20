@@ -49,7 +49,7 @@
     <!--    <script>
         $(document).ready(function(){
             var trHTML = '';
-            var data  =<%= buildInfoOutput %>;
+            var data  =;
 
             $.each(data, function (key, value) {
 
