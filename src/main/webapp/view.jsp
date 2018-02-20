@@ -1,3 +1,12 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<sql:query var="emp" dataSource="jdbc/mbdb">
+    SELECT empno, ename, job, mgr, hiredate, sal, comm, deptno
+    FROM lab.emp;
+</sql:query>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.io.File" %>
 <%@ page import="java.io.FileInputStream" %>
@@ -37,20 +46,6 @@
     <title>BuildInfo</title>
     <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
     <script src="/lib/jquery/jquery-2.2.4.min.js"></script>
-    <!--    <script>
-        $(document).ready(function(){
-            var trHTML = '';
-            var data  =;
-
-            $.each(data, function (key, value) {
-
-                trHTML += '<tr><td>' + key + '</td><td>' + value + '</td></tr>';
-            });
-
-            $('#map').append(trHTML);
-        })
-
-    </script>-->
 </head>
 <body>
 <br/>
@@ -60,9 +55,15 @@
     <h3>Configurations:</h3>
     <table id="map"  class="table table-hover">
         <tr class="info">
-            <th>Config</th>
-            <th>Value</th>
+            <th>ID</th>
+            <th>Name</th>
         </tr>
+        <c:forEach var="row" items="${emp.rows}">
+            <tr>
+                <td>${row.empno}</td>
+                <td>${row.ename}</td>
+            </tr>
+        </c:forEach>
     </table>
 </div>
 

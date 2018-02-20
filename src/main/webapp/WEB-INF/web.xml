@@ -1,4 +1,8 @@
-<web-app>
+<web-app xmlns:jee="http://www.springframework.org/schema/jee">
+
+    <jee:jndi-lookup id="dataSource"
+                     jndi-name="jdbc/mbdb"
+                     expected-type="javax.sql.DataSource"/>
 
     <servlet>
         <servlet-name>view</servlet-name>
