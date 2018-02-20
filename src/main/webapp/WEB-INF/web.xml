@@ -1,0 +1,12 @@
+<web-app>
+
+    <servlet>
+        <servlet-name>buildInfo</servlet-name>
+        <jsp-file>/buildInfo.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>buildInfo</servlet-name>
+        <url-pattern>/buildInfo/*</url-pattern>
+    </servlet-mapping>
+
+</web-app>
