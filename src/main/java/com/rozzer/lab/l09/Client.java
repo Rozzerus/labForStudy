@@ -23,6 +23,8 @@ public class Client {
         System.out.println("Circle area:"+worker.circleArea(point1,point2));
         System.out.println("Circle length diametr:"+worker.circleLengthDiametr(point1,point2));
         System.out.println("Circle area diametr:"+worker.circleAreaDiametr(point1,point2));
+        Scanner scanner = new Scanner(System.in);
+        scanner.next();
     }
 
 
