@@ -48,11 +48,7 @@
     <title>View</title>
     <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
     <script src="/lib/jquery/jquery-2.2.4.min.js"></script>
-    <script>
-        $( "tr" ).click(function() {
-            $( this ).slideUp();
-        });
-    </script>
+
 </head>
 <body>
 <br/>
@@ -71,9 +67,9 @@
             <th>Department</th>
         </tr>
         <c:forEach var="row" items="${emp.rows}">
-            <tr id="${row.empno}">
-                <td>${row.empno}</td>
-                <td>${row.ename}</td>
+            <tr id="${row.empno}" >
+                <td><a href="/editor?id=${row.empno}">${row.empno}</a></td>
+                <td><a href="/editor?id=${row.empno}">${row.ename}</a></td>
                 <td>${row.job}</td>
                 <td>${row.mgr}</td>
                 <td>${row.hiredate}</td>
