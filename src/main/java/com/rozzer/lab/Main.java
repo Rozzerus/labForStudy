@@ -26,7 +26,7 @@ public class Main extends AbstractWebSocketMessageBrokerConfigurer {
 
         ManagerData.getInstance().getLabData().add(new LabExperimentalDataModel01(new Integer[]{0,0,0,0,0}, 3,  1));
 //        ManagerData.getInstance().getLabData().add(new LabExperimentalDataModel02(new Double[]{0d,0d,0d,0d,0d}, 0d, 2));
-//        ManagerData.getInstance().getLabData().add(new LabExperimentalDataModel01(new Integer[]{0,0,0,0,0}, 3,  3));
+//        ManagerData.getInstance().getLabData().add(new LabExperimentalDataModel01(new Integer[]{0,0,0,0,0}, 3,  3));//
 
 
         ManagerData.getInstance().getLabData().forEach(lab -> {
