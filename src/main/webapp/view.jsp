@@ -68,24 +68,27 @@
         </tr>
         <c:forEach var="row" items="${emp.rows}">
             <tr id="${row.empno}" >
-                <td><a href="/editor?id=${row.empno}">${row.empno}</a></td>
-                <td><a href="/editor?id=${row.empno}">${row.ename}</a></td>
+                <td>${row.empno}</td>
+                <td>${row.ename}</td>
                 <td>${row.job}</td>
                 <td>${row.mgr}</td>
                 <td>${row.hiredate}</td>
                 <td>${row.sal}</td>
                 <td>${row.deptno}</td>
+                <td><input onclick="location.href='/editor?id=${row.empno}'"  type="submit" name="Submit" value="Update" style="background-color:#54777D;font-weight:bold;color:#dddddd;"></td>
             </tr>
         </c:forEach>
         <tr>
-            <td><input type="text" name="name" value="<%=rs.getString("name")%>"></td>
-            <td><input type="text" name="address" value="<%=rs.getString("address")%>"></td>
-            <td><input type="text" name="contact" value="<%=rs.getInt("contactNo")%>"></td>
-            <td><input type="text" name="email" value="<%=rs.getString("email")%>"></td>
-            <td><input type="hidden" name="id" value="<%=rs.getString(1)%>"></td>
-        </tr>
-        <tr>
-            <td><input type="submit" name="Submit" value="Update" style="background-color:#49743D;font-weight:bold;color:#ffffff;"></td>
+            <form action = "add.jsp" method = "GET" >
+                <td>id</td>
+                <td><input type="text" name="ename" ></td>
+                <td><input type="text" name="job" ></td>
+                <td><input type="text" name="mgr"></td>
+                <td><input type="text" name="hiredate" ></td>
+                <td><input type="text" name="sal" ></td>
+                <td><input type="text" name="deptno" ></td>
+                <td><input type="submit" name="Submit" value="Add" style="background-color:#49743D;font-weight:bold;color:#ffffff;"></td>
+            </form>
         </tr>
         <edit></edit>
     </table>
