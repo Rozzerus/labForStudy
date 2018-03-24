@@ -9,8 +9,20 @@
         <jsp-file>/view.jsp</jsp-file>
     </servlet>
     <servlet>
+        <servlet-name>departments</servlet-name>
+        <jsp-file>/departments.jsp</jsp-file>
+    </servlet>
+    <servlet>
         <servlet-name>editor</servlet-name>
         <jsp-file>/editor.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>add</servlet-name>
+        <jsp-file>/add.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>delete</servlet-name>
+        <jsp-file>/delete.jsp</jsp-file>
     </servlet>
     <servlet>
         <servlet-name>searching</servlet-name>
@@ -25,8 +37,20 @@
         <url-pattern>/view/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>departments</servlet-name>
+        <url-pattern>/departments/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>editor</servlet-name>
         <url-pattern>/editor/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>add</servlet-name>
+        <url-pattern>/add/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>delete</servlet-name>
+        <url-pattern>/delete/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>searching</servlet-name>
