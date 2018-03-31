@@ -1,3 +1,4 @@
+<%@ page import="com.rozzer.lab.l11.JMSSender" %>
 <%@ page import="java.io.File" %>
 <%@ page import="java.io.FileWriter" %>
 <%@ page import="java.sql.Date" %>
@@ -35,6 +36,7 @@
 </sql:update>
 
 <%
+    JMSSender.getInstance().send("",System.currentTimeMillis(),request.getParameter("empno"),"UPDATE");
     response.sendRedirect("/view.jsp");
 %>
 

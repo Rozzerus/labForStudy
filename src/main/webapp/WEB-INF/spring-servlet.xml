@@ -1,0 +1,32 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+    <!--Sender-->
+    <bean id="cachingConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+        <property name="targetConnectionFactory" ref="connectionFactory"/>
+    </bean>
+
+    <bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="tcp://localhost:10002"/>
+    </bean>
+
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="cachingConnectionFactory"/>
+    </bean>
+
+    <bean class="com.rozzer.lab.l11.JMSSender" init-method="init"
+    destroy-method="destroy">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="destinationName" value="ForLab"/>
+        <property name="topic" value="true"/>
+    </bean>
+    <!--Sender-->
+
+
+
+
+</beans>

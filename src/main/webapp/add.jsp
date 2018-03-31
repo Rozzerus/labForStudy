@@ -1,4 +1,5 @@
-<%@ page import="java.sql.Date"%>
+<%@ page import="com.rozzer.lab.l11.JMSSender"%>
+<%@ page import="java.sql.Date" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
@@ -18,5 +19,6 @@
         ,(select deptno from lab.dept where dname = '<%=deptno%>' limit 1));
 </sql:update>
 <%
+    JMSSender.getInstance().send("",System.currentTimeMillis(),"","INSERT");
     response.sendRedirect("/view.jsp");
 %>

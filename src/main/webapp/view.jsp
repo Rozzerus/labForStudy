@@ -27,7 +27,7 @@
 <body>
 <input onclick="location.href='/departments'"  type="submit" name="Submit" value="Department" style="background-color:#63656d;font-weight:bold;color:#eeeeee;">
 <input onclick="location.href='/view'"  type="submit" name="Submit" value="View" style="background-color:#63656d;font-weight:bold;color:#eeeeee;">
-<input onclick="location.href='/log.txt'"  type="submit" name="Submit" value="Log" style="background-color:#63656d;font-weight:bold;color:#eeeeee;">
+<input onclick="location.href='/log'"  type="submit" name="Submit" value="Log" style="background-color:#63656d;font-weight:bold;color:#eeeeee;">
 <form action = "view.jsp" method = "GET" >
     <input  type="submit" name="Submit" value="Searching" style="background-color:#1d6d24;font-weight:bold;color:#dddddd;">
     <input type="text" name="ename" >

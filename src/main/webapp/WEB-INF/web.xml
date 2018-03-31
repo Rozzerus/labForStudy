@@ -1,5 +1,19 @@
 <web-app xmlns:jee="http://www.springframework.org/schema/jee">
 
+
+
+    <servlet>
+        <servlet-name>spring</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/spring-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+        <async-supported>true</async-supported>
+    </servlet>
+
+
     <jee:jndi-lookup id="dataSource"
                      jndi-name="jdbc/mbdb"
                      expected-type="javax.sql.DataSource"/>
