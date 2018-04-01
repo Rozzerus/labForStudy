@@ -7,11 +7,16 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
+import javax.ejb.MessageDriven;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import java.sql.Timestamp;
 
 @Component
+@MessageDriven(
+        mappedName = "jms/ForLab",
+        name = "JMSListener"
+)
 public class JMSListener implements MessageListener {
 
 
